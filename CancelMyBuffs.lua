@@ -14,6 +14,9 @@ local L = setmetatable(ns.L or { }, { __index = function(t, k)
 	return k
 end })
 
+_G["BINDING_HEADER_CANCELMYBUFFS"] = ADDON_NAME
+_G["BINDING_NAME_CLICK CancelMyBuffsButton:LeftButton"] = L["Cancel buffs"]
+
 ------------------------------------------------------------------------
 
 local defaults = {
@@ -21,14 +24,18 @@ local defaults = {
 		forms = true,
 		mounts = true,
 		vehicles = true,
+		weaponBuffs = false,
 		buffGroups = {
-			["Invulnerability"] = true,
+			["General"] = true,
 			["Shapeshift"] = true,
 			["Slow Fall"] = true,
 		},
 	},
 	global = {
-		["Invulnerability"] = {
+		["General"] = {
+			[46924] = true, -- Blade Storm
+			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
+			[49352] = true, -- Crashin' Thrashin' Racer Controller
 			[19263] = true, -- Deterrence
 			[1022]  = true, -- Hand of Protection
 			[45438] = true, -- Ice Block
@@ -75,11 +82,15 @@ local defaults = {
 			[16593] = true, -- Noggenfogger Elixir (slow fall)
 			[130]   = true, -- Slow Fall
 		},
-		["Shadowmourne"] = {
-			[73422] = true, -- Chaos Bane (Shadowmourne proc) (ret paladins want to cancel it)
-		},
 		["Divine Shield"] = {
 			[642]   = true, -- Divine Shield
+		},
+		["Hellfire"] = {
+			[1949]  = true, -- Hellfire
+			[85403] = true, -- Hellfire (Demonology spec version)
+		},
+		["Shadowmourne"] = {
+			[73422] = true, -- Chaos Bane (Shadowmourne proc) (ret paladins want to cancel it)
 		},
 	}
 }
@@ -100,48 +111,12 @@ function CancelMyBuffs:OnInitialize()
 end
 
 function CancelMyBuffs:OnEnable()
-	local _, class = UnitClass("player")
-
-	local macrotext = ""
-	if self.db.profile.forms and (class == "DRUID" or class == "PRIEST" or class == "SHAMAN") then
-		macrotext = macrotext .. "\n/cancelform"
-	end
-	if self.db.profile.mounts then
-		macrotext = macrotext .. "\n/dismount"
-	end
-	if self.db.profile.vehicles then
-		macrotext = macrotext .. [[\n/run if UnitHasVehicleUI("player")then VehicleExit()end]]
-	end
-	for group in pairs(self.db.profile.buffGroups) do
-		local buffs = self.db.global[group]
-		if buffs then
-			for id, enabled in pairs(buffs) do
-				if enabled then
-					local name, _, icon = GetSpellInfo(id)
-					if name then
-						buffList[name] = icon
-					end
-				end
-			end
-		end
-	end
-	for buff in pairs(buffList) do
-		macrotext = macrotext .. "\n/cancelaura " .. buff
-	end
-	macrotext = macrotext:sub(2)
-
-	if macrotext:len() > 1024 then
-		print("|cff33ff99CancelMyBuffs:|r", "Too many buffs selected!")
-		macrotext = macrotext:sub(1, 1024):match("(.+)\n/[^\/]+$")
-	end
-
-	self.button:SetAttribute("type1", "macro")
-	self.button:SetAttribute("macrotext1", macrotext)
+	self:SetupButton()
 
 	self:SetupOptions()
 
 	if not GetBindingKey(CANCELMYBUFFS_BINDING) then
-		print("|cff33ff99CancelMyBuffs:|r", "No key binding set. Type /cmb for options!")
+		print("|cff33ff99CancelMyBuffs:|r", "No key binding set! Type \"/cmb\" for options.")
 	end
 
 	-- self:RegisterEvent("UNIT_AURA")
@@ -163,6 +138,60 @@ end
 
 ------------------------------------------------------------------------
 
+function CancelMyBuffs:SetupButton()
+	local _, class = UnitClass("player")
+
+	local macrotext = ""
+	if self.db.profile.forms and (class == "DRUID" or class == "PRIEST" or class == "SHAMAN") then
+		macrotext = macrotext .. "\n/cancelform"
+	end
+	if self.db.profile.mounts then
+		macrotext = macrotext .. "\n/dismount"
+	end
+	if self.db.profile.vehicles then
+		macrotext = macrotext .. "\n/run if UnitHasVehicleUI(\"player\")then VehicleExit()end"
+	end
+	if self.db.profile.weaponBuffs and (class == "ROGUE" or class == "SHAMAN") then
+		if not TemporaryEnchantFrame:IsShown() then
+			TempEnchant1:SetID(16)
+			TempEnchant2:SetID(17)
+			TempEnchant3:SetID(18)
+		end
+		macrotext = macrotext .. "\n/click TempEnchant1 RightButton\n/click TempEnchant2 RightButton\n/click TempEnchant3 RightButton"
+	end
+
+	wipe(buffList)
+	for group, enabled in pairs(self.db.profile.buffGroups) do
+		if enabled then
+			local buffs = self.db.global[group]
+			if buffs then
+				for id, enabled in pairs(buffs) do
+					if enabled then
+						local name, _, icon = GetSpellInfo(id)
+						if name then
+							buffList[name] = icon
+						end
+					end
+				end
+			end
+		end
+	end
+	for buff in pairs(buffList) do
+		macrotext = macrotext .. "\n/cancelaura " .. buff
+	end
+	macrotext = macrotext:sub(2)
+
+	if macrotext:len() > 1000 then
+		print("|cff33ff99CancelMyBuffs:|r", "Too many buffs selected!")
+		macrotext = macrotext:sub(1, 1024):match("(.+)\n/[^\/]+$")
+	end
+
+	self.button:SetAttribute("type1", "macro")
+	self.button:SetAttribute("macrotext1", macrotext)
+end
+
+------------------------------------------------------------------------
+
 function CancelMyBuffs:SetupOptions()
 	if self.options then return end
 
@@ -170,8 +199,13 @@ function CancelMyBuffs:SetupOptions()
 		name = "CancelMyBuffs",
 		desc = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
 		type = "group",
-		get = function(t) return self.db.profile[t[#t]] end,
-		set = function(t, v) self.db.profile[t[#t]] = v end,
+		get = function(t)
+			return self.db.profile[t[#t]]
+		end,
+		set = function(t, v)
+			self.db.profile[t[#t]] = v
+			self:SetupButton()
+		end,
 		args = {
 			keybinding = {
 				name = L["Key Binding"],
@@ -181,7 +215,7 @@ function CancelMyBuffs:SetupOptions()
 					return GetBindingKey(CANCELMYBUFFS_BINDING)
 				end,
 				set = function(_, v)
-					SetBinding(value, CANCELMYBUFFS_BINDING)
+					SetBinding(v, CANCELMYBUFFS_BINDING)
 					SaveBindings(GetCurrentBindingSet())
 				end,
 			},
@@ -192,27 +226,53 @@ function CancelMyBuffs:SetupOptions()
 				type = "toggle",
 			},
 			vehicles = {
-				name = L["Leave Vehicle"],
+				name = L["Leave vehicle"],
 				desc = L["Also leave vehicles when cancelling buffs."],
 				order = 300, width = "double",
 				type = "toggle",
 			},
+			weaponBuffs = {
+				name = L["Remove weapon buffs"],
+				desc = L["Also remove weapon buffs when cancelling buffs."],
+				order = 400, width = "double",
+				type = "toggle",
+			},
 			buffGroups = {
-				name = L["Remove Buff Groups"],
+				name = L["Remove buffs"],
 				desc = L["Select which buffs to remove."],
 				order = 500,
 				type = "group", inline = true,
-				get = function(t) return self.db.profile.buffGroups[t[#t]] end,
-				set = function(t, v) self.db.profile.buffGroups[t[#t]] = v end,
+				get = function(t) return
+					self.db.profile.buffGroups[t[#t]]
+				end,
+				set = function(t, v)
+					self.db.profile.buffGroups[t[#t]] = v
+					self:SetupButton()
+				end,
 				args = {
 				},
 			},
 		},
 	}
 
-	for groupName in pairs(self.db.global) do
+	local t1, t2 = { }, { }
+	for groupName, groupBuffs in pairs(self.db.global) do
+		wipe(t1)
+		wipe(t2)
+		for id in pairs(groupBuffs) do
+			local name = GetSpellInfo(id)
+			if name then
+				t1[name] = true
+			end
+		end
+		for name in pairs(t1) do
+			table.insert(t2, name)
+		end
+		table.sort(t2)
 		self.options.args.buffGroups.args[groupName] = {
 			name = L[groupName],
+			desc = (#t2 > 1) and ("- " .. table.concat(t2, "\n- ")) or nil,
+			order = (groupName == "General") and 1 or nil,
 			width = "double",
 			type = "toggle",
 		}
