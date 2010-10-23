@@ -1,0 +1,17 @@
+## Interface: 40000
+## Version: 4.0.1.wowi:revision
+
+## Title: CancelMyBuffs
+## Notes: Quickly cancel unwanted buffs.
+## Author: Phanx
+## X-Email: addons@phanx.net
+## X-Copyright: Copyright 2010 Phanx.
+## X-License: Do not redistribute. Some code reuse permitted. See README file.
+## X-Website:
+## X-Curse-ProjectName: cancelmybuffs
+## X-WoWI-ID:
+
+## OptionalDependencies: Ace3, LibDataBroker-1.1, LibDBIcon-1.0, LibSink-2.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
+## SavedVariables: CancelMyBuffsDB
+
+CancelMyBuffs.lua
