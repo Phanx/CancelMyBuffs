@@ -14,4 +14,21 @@
 ## OptionalDependencies: Ace3, LibDataBroker-1.1, LibDBIcon-1.0, LibSink-2.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
 ## SavedVariables: CancelMyBuffsDB
 
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\AceAddon-3.0\AceAddon-3.0.lua
+# Libs\AceBucket-3.0\AceBucket-3.0.lua
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+Libs\AceConfigRegistry-3.0\AceConfigRegistry-3.0.lua
+Libs\AceConfigDialog-3.0\AceConfigDialog-3.0.lua
+Libs\AceConsole-3.0\AceConsole-3.0.lua
+Libs\AceDB-3.0\AceDB-3.0.lua
+# Libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
+Libs\AceEvent-3.0\AceEvent-3.0.lua
+# Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+# Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+# Libs\LibDualSpec-1.0\LibDualSpec-1.0.lua
+# Libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+# Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
+
 CancelMyBuffs.lua
