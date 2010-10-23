@@ -21,9 +21,9 @@ _G["BINDING_NAME_CLICK CancelMyBuffsButton:LeftButton"] = L["Cancel buffs"]
 
 local defaults = {
 	profile = {
-		forms = true,
-		mounts = true,
-		vehicles = true,
+		forms = false,
+		mounts = false,
+		vehicles = false,
 		weaponBuffs = false,
 		buffGroups = {
 			["General"] = true,
@@ -139,9 +139,10 @@ end
 ------------------------------------------------------------------------
 
 function CancelMyBuffs:SetupButton()
+	-- print("SetupButton")
 	local _, class = UnitClass("player")
 
-	local macrotext = ""
+	local macrotext = "" -- "\n/run print(\"click\")"
 	if self.db.profile.forms and (class == "DRUID" or class == "PRIEST" or class == "SHAMAN") then
 		macrotext = macrotext .. "\n/cancelform"
 	end
@@ -209,7 +210,7 @@ function CancelMyBuffs:SetupOptions()
 		args = {
 			keybinding = {
 				name = L["Key Binding"],
-				order = 100, width = "full",
+				order = 10, width = "full",
 				type = "keybinding",
 				get = function()
 					return GetBindingKey(CANCELMYBUFFS_BINDING)
@@ -222,25 +223,31 @@ function CancelMyBuffs:SetupOptions()
 			mounts = {
 				name = L["Dismount"],
 				desc = L["Also dismount when cancelling buffs."],
-				order = 200, width = "double",
+				order = 20, width = "double",
 				type = "toggle",
 			},
 			vehicles = {
 				name = L["Leave vehicle"],
 				desc = L["Also leave vehicles when cancelling buffs."],
-				order = 300, width = "double",
+				order = 30, width = "double",
+				type = "toggle",
+			},
+			forms = {
+				name = L["Leave form"],
+				desc = L["Also cancel forms when cancelling buffs."],
+				order = 40, width = "double",
 				type = "toggle",
 			},
 			weaponBuffs = {
 				name = L["Remove weapon buffs"],
 				desc = L["Also remove weapon buffs when cancelling buffs."],
-				order = 400, width = "double",
+				order = 50, width = "double",
 				type = "toggle",
 			},
 			buffGroups = {
 				name = L["Remove buffs"],
 				desc = L["Select which buffs to remove."],
-				order = 500,
+				order = 60,
 				type = "group", inline = true,
 				get = function(t) return
 					self.db.profile.buffGroups[t[#t]]
