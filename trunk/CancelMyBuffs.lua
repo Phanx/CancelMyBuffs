@@ -22,18 +22,18 @@ local defaults = {
 		mounts = true,
 		vehicles = true,
 		buffGroups = {
-			["Invulnerability effects"] = true,
-			["Shapeshift effects"] = true,
-			["Slow Fall effects"] = true,
+			["Invulnerability"] = true,
+			["Shapeshift"] = true,
+			["Slow Fall"] = true,
 		},
 	},
 	global = {
-		["Invulnerability Effects"] = {
+		["Invulnerability"] = {
 			[19263] = true, -- Deterrence
 			[1022]  = true, -- Hand of Protection
 			[45438] = true, -- Ice Block
 		},
-		["Shapeshift effects"] = {
+		["Shapeshift"] = {
 			[71485] = true, -- Agility of the Vrykul
 			[71556] = true, -- Agility of the Vrykul (heroic)
 			[71491] = true, -- Aim of the Iron Dwarves
@@ -51,7 +51,7 @@ local defaults = {
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
 			[24740] = true, -- Wisp Costume
 		},
-		["Cosmetic effects"] = {
+		["Cosmetic"] = {
 			[60122] = true, -- Baby Spice
 			[27571] = true, -- Cascade of Roses (from Handful of Roses)
 			[51010] = true, -- Dire Brew
@@ -70,7 +70,7 @@ local defaults = {
 			[44755] = true, -- Snowflakes (from Handful of Snowflakes)
 			[61815] = true, -- Sprung! (from Spring Flowers)
 		},
-		["Slow Fall effects"] = {
+		["Slow Fall"] = {
 			[1706]  = true, -- Levitate
 			[16593] = true, -- Noggenfogger Elixir (slow fall)
 			[130]   = true, -- Slow Fall
@@ -114,7 +114,7 @@ function CancelMyBuffs:OnEnable()
 	end
 	for group in pairs(self.db.profile.buffGroups) do
 		local buffs = self.db.global[group]
-		if group then
+		if buffs then
 			for id, enabled in pairs(buffs) do
 				if enabled then
 					local name, _, icon = GetSpellInfo(id)
