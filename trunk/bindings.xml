@@ -1,4 +1,4 @@
 <Bindings>
-	<Binding name="CLICK CancelMyBuffsButton:LeftButton" header="CancelMyBuffs">
+	<Binding name="CLICK CancelMyBuffsButton:LeftButton" header="CANCELMYBUFFS">
 	</Binding>
 </Bindings>
