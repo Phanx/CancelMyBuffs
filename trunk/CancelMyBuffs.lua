@@ -25,8 +25,8 @@ local defaults = {
 			name = L["Default"],
 			enable = true,
 			color = { 1, 1, 0 },
-			flash = true,
-			sound = "NONE",
+			flash = false,
+			sound = false,
 			include = {
 				["INVULNERABLE"] = true,
 				["SHAPESHIFTED"] = true,
@@ -34,11 +34,21 @@ local defaults = {
 			},
 		},
 		{
+			name = L["Cosmetic Effects"],
+			enable = true,
+			color = { 1, 1, 0 },
+			flash = false,
+			sound = false,
+			include = {
+				["COSMETIC"] = true,
+			},
+		},
+		{
 			name = L["Weapon Buffs"],
 			enable = true,
 			color = { 118 / 255, 47 / 255, 170 / 255 },
 			flash = false,
-			sound = "NONE",
+			sound = false,
 			include = {
 				["WEAPONBUFFS"] = true,
 			},
@@ -62,6 +72,7 @@ local defaults = {
 			[71484] = true, -- Strength of the Taunka
 			[71561] = true, -- Strength of the Taunka
 			[24732] = true, -- Bat Costume
+			[22736] = true, -- Gordok Ogre Suit
 			[58501] = true, -- Iron Boot Flask
 			[16591] = true, -- Noggenfogger Elixir (skeleton)
 			[24740] = true, -- Wisp Costume
@@ -121,7 +132,7 @@ function CancelMyBuffs:OnEnable()
 				elseif groupName == "MOUNTED" then
 					macrotext = macrotext .. "\n/dismount\n/run ExitVehicle()"
 				elseif groupName == "WEAPONBUFFS" then
-					macrotext = macrotext = "\n/dismount
+					macrotext = macrotext .. "\n/run CancelItemTempEnchantment(1) CancelItemTempEnchantment(2)"
 				end
 			end
 
@@ -145,7 +156,7 @@ function CancelMyBuffs:OnEnable()
 	end
 end
 
-function addon:UNIT_AURA(event, unit)
+function CancelMyBuffs:UNIT_AURA(event, unit)
 	if unit ~= "player" then return end
 
 	for _, bindGroup in ipairs(self.db.profile) do
@@ -172,7 +183,7 @@ function addon:UNIT_AURA(event, unit)
 	end
 end
 
-function addon:Alert(bindGroup)
+function CancelMyBuffs:Alert(bindGroup)
 	if not bindGroup.enable then return end
 
 	UIErrorsFrame:AddMessage(bindGroup.name .. " buff found! Press " .. bindGroup.bind .. " to cancel!", bindGroup.color[1] or 1, bindGroup.color[2] or 1, bindGroup.color[3] or 1)
