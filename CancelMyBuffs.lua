@@ -14,9 +14,6 @@ local L = setmetatable(ns.L or { }, { __index = function(t, k)
 	return k
 end })
 
-L["Shadowmourne"] = GetItemInfo(49623) or L["Shadowmourne"]
-L["Slow Fall"] = GetSpellInfo(130)
-
 ------------------------------------------------------------------------
 
 local defaults = {
@@ -25,9 +22,9 @@ local defaults = {
 		mounts = true,
 		vehicles = true,
 		buffGroups = {
-			["Invulnerability Effects"] = true,
-			["Shapeshift Effects"] = true,
-			["Slow Fall"] = true,
+			["Invulnerability effects"] = true,
+			["Shapeshift effects"] = true,
+			["Slow Fall effects"] = true,
 		},
 	},
 	global = {
@@ -36,7 +33,7 @@ local defaults = {
 			[1022]  = true, -- Hand of Protection
 			[45438] = true, -- Ice Block
 		},
-		["Shapeshift Effects"] = {
+		["Shapeshift effects"] = {
 			[71485] = true, -- Agility of the Vrykul
 			[71556] = true, -- Agility of the Vrykul (heroic)
 			[71491] = true, -- Aim of the Iron Dwarves
@@ -54,7 +51,7 @@ local defaults = {
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
 			[24740] = true, -- Wisp Costume
 		},
-		["Cosmetic Effects"] = {
+		["Cosmetic effects"] = {
 			[60122] = true, -- Baby Spice
 			[27571] = true, -- Cascade of Roses (from Handful of Roses)
 			[51010] = true, -- Dire Brew
@@ -73,7 +70,7 @@ local defaults = {
 			[44755] = true, -- Snowflakes (from Handful of Snowflakes)
 			[61815] = true, -- Sprung! (from Spring Flowers)
 		},
-		["Slow Fall"] = {
+		["Slow Fall effects"] = {
 			[1706]  = true, -- Levitate
 			[16593] = true, -- Noggenfogger Elixir (slow fall)
 			[130]   = true, -- Slow Fall
@@ -81,12 +78,17 @@ local defaults = {
 		["Shadowmourne"] = {
 			[73422] = true, -- Chaos Bane (Shadowmourne proc) (ret paladins want to cancel it)
 		},
+		["Divine Shield"] = {
+			[642]   = true, -- Divine Shield
+		},
 	}
 }
 
 ------------------------------------------------------------------------
 
 local buffList = { }
+
+local CANCELMYBUFFS_BINDING = "CLICK CancelMyBuffsButton:LeftButton"
 
 local CancelMyBuffs = LibStub("AceAddon-3.0"):NewAddon("CancelMyBuffs")
 
@@ -129,7 +131,7 @@ function CancelMyBuffs:OnEnable()
 	macrotext = macrotext:sub(2)
 
 	if macrotext:len() > 1024 then
-		print("Too many buffs selected!")
+		print("|cff33ff99CancelMyBuffs:|r", "Too many buffs selected!")
 		macrotext = macrotext:sub(1, 1024):match("(.+)\n/[^\/]+$")
 	end
 
@@ -137,6 +139,10 @@ function CancelMyBuffs:OnEnable()
 	self.button:SetAttribute("macrotext1", macrotext)
 
 	self:SetupOptions()
+
+	if not GetBindingKey(CANCELMYBUFFS_BINDING) then
+		print("|cff33ff99CancelMyBuffs:|r", "No key binding set. Type /cmb for options!")
+	end
 
 	-- self:RegisterEvent("UNIT_AURA")
 end
@@ -159,8 +165,6 @@ end
 
 function CancelMyBuffs:SetupOptions()
 	if self.options then return end
-
-	local CANCELMYBUFFS_BINDING = "CLICK CancelMyBuffsButton:LeftButton"
 
 	self.options = {
 		name = "CancelMyBuffs",
