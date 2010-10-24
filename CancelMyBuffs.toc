@@ -25,6 +25,7 @@ Libs\AceConsole-3.0\AceConsole-3.0.lua
 Libs\AceDB-3.0\AceDB-3.0.lua
 # Libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
 Libs\AceEvent-3.0\AceEvent-3.0.lua
+Libs\LibAboutPanel\LibAboutPanel.lua
 # Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
 # Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
 # Libs\LibDualSpec-1.0\LibDualSpec-1.0.lua
