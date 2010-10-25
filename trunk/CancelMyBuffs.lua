@@ -74,6 +74,7 @@ local defaults = {
 			[61819] = true, -- Manabonked! (from The Mischief Maker)
 			[61834] = true, -- Manabonked! (cast by Minigob Manabonk)
 			[69285] = true, -- Mohawked! -- check 58493
+			[42365] = true, -- Murloc Costume
 			[24710] = true, -- Ninja Costume
 			[60106] = true, -- Old Spices
 			[24709] = true, -- Pirate Costume
