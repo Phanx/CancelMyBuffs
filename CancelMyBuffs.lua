@@ -221,7 +221,8 @@ function CancelMyBuffs:SetupOptions()
 					return GetBindingKey(CANCELMYBUFFS_BINDING)
 				end,
 				set = function(_, v)
-					SetBinding(v, CANCELMYBUFFS_BINDING)
+					SetBinding(GetBindingKey(CANCELMYBUFFS_BINDING)) -- clear old binding
+					SetBinding(v, CANCELMYBUFFS_BINDING) -- set new binding
 					SaveBindings(GetCurrentBindingSet())
 				end,
 			},
