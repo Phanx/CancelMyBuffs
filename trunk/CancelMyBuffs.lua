@@ -7,6 +7,8 @@
 
 local ADDON_NAME, ns = ...
 
+local _, class, _, race = UnitClass("player"), UnitRace("player")
+
 local L = setmetatable(ns.L or { }, { __index = function(t, k)
 	if k == nil then return "" end
 	local v = tostring(k)
@@ -40,6 +42,12 @@ local defaults = {
 			[1022]  = true, -- Hand of Protection
 			[45438] = true, -- Ice Block
 			[45440] = true, -- Steam Tonk Controller
+		},
+		["Stealth"] = {
+			[66]    = true, -- Invisibility
+			[58984] = true, -- Shadowmeld
+			[1784]  = true, -- Stealth
+			[1856]  = true, -- Vanish -- check 11327
 		},
 		["Deathbringer's Will"] = {
 			[71485] = true, -- Agility of the Vrykul
@@ -221,8 +229,12 @@ function CancelMyBuffs:SetupOptions()
 					return GetBindingKey(CANCELMYBUFFS_BINDING)
 				end,
 				set = function(_, v)
-					SetBinding(GetBindingKey(CANCELMYBUFFS_BINDING)) -- clear old binding
-					SetBinding(v, CANCELMYBUFFS_BINDING) -- set new binding
+					local prev1, prev2 = GetBindingKey(CANCELMYBUFFS_BINDING)
+					if prev1 == v then return end
+					if prev1 then SetBinding(prev1) end
+					if prev2 then SetBinding(prev2) end
+					SetBinding(v, CANCELMYBUFFS_BINDING)
+					if prev2 then SetBinding(prev2, CANCELMYBUFFS_BINDING) end
 					SaveBindings(GetCurrentBindingSet())
 				end,
 			},
