@@ -229,12 +229,25 @@ function CancelMyBuffs:SetupOptions()
 					return GetBindingKey(CANCELMYBUFFS_BINDING)
 				end,
 				set = function(_, v)
+					-- clear any previous bindings
 					local prev1, prev2 = GetBindingKey(CANCELMYBUFFS_BINDING)
 					if prev1 == v then return end
 					if prev1 then SetBinding(prev1) end
 					if prev2 then SetBinding(prev2) end
-					SetBinding(v, CANCELMYBUFFS_BINDING)
+
+					if v and v:len() > 0 then
+						-- warn if overwriting an existing binding
+						local curr = GetBindingAction(v)
+						if curr and curr:len() > 0 then print(KEY_UNBOUND_ERROR:format(curr)) end
+
+						-- set new binding
+						SetBinding(v, CANCELMYBUFFS_BINDING)
+					end
+
+					-- restore second binding if there was one
 					if prev2 then SetBinding(prev2, CANCELMYBUFFS_BINDING) end
+
+					-- save
 					SaveBindings(GetCurrentBindingSet())
 				end,
 			},
