@@ -1,0 +1,24 @@
+Copyright © 2010 Phanx.
+
+The contents of this software, excluding third-party resources, are
+copyrighted to its author with all rights reserved, under United States
+copyright law and various international treaties.
+
+In particular, please note that you may not distribute this software in
+any form, with or without modifications, including as part of a 
+compilation, without prior written permission from its author.
+
+You are hereby granted the following additional rights:
+
+1. You may download, install, and run this software as a user interface
+   add-on within the World of Warcraft game client.
+
+2. You may make modifications to the software for private use only.
+
+3. You may use source code from this software for any purpose, provided
+   that the names of this software and/or its author are not used to
+   promote your project, and do not appear in any files or documentation
+   related to your project, outside of an optional credits notation.
+
+All rights not explicitly addressed in this license are reserved by the
+copyright holder.
