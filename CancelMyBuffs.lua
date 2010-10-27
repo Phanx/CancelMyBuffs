@@ -7,7 +7,7 @@
 
 local ADDON_NAME, ns = ...
 
-local _, class, _, race = UnitClass("player"), UnitRace("player")
+local _, class, _, race, _, faction = UnitClass("player"), UnitRace("player"), UnitFactionGroup("player")
 
 local L = setmetatable(ns.L or { }, { __index = function(t, k)
 	if k == nil then return "" end
@@ -34,20 +34,22 @@ local defaults = {
 		},
 	},
 	global = {
-		["General"] = {
-			[46924] = true, -- Blade Storm
-			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
-			[49352] = true, -- Crashin' Thrashin' Racer Controller
-			[19263] = true, -- Deterrence
+		["Invulnerability"] = {
+			[46924] = "WARRIOR", -- Blade Storm
+			[19263] = "HUNTER", -- Deterrence
 			[1022]  = true, -- Hand of Protection
-			[45438] = true, -- Ice Block
-			[45440] = true, -- Steam Tonk Controller
+			[45438] = "MAGE", -- Ice Block
 		},
 		["Stealth"] = {
-			[66]    = true, -- Invisibility
-			[58984] = true, -- Shadowmeld
-			[1784]  = true, -- Stealth
-			[1856]  = true, -- Vanish -- check 11327
+			[66]    = "MAGE", -- Invisibility
+			[58984] = "NightElf", -- Shadowmeld
+			[1784]  = "ROGUE", -- Stealth
+			[1856]  = "ROGUE", -- Vanish -- check 11327
+		},
+		["Toy Controllers"] = {
+			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
+			[49352] = true, -- Crashin' Thrashin' Racer Controller
+			[45440] = true, -- Steam Tonk Controller
 		},
 		["Deathbringer's Will"] = {
 			[71485] = true, -- Agility of the Vrykul
@@ -63,7 +65,7 @@ local defaults = {
 		},
 		["Shapeshifts"] = {
 			[24732] = true, -- Bat Costume
-			[6406]  = true, -- Furbolg Form (from Dartol's Rod of Transformation) -- check prevents mounting?
+			[6406]  = "Alliance", -- Furbolg Form (from Dartol's Rod of Transformation) -- check prevents mounting?
 			[22736] = true, -- Gordok Ogre Suit
 			[58501] = true, -- Iron Boot Flask
 			[16591] = true, -- Noggenfogger Elixir (skeleton)
@@ -71,7 +73,7 @@ local defaults = {
 			[61716] = true, -- Rabbit Costume (from Blossoming Branch)
 			[24740] = true, -- Wisp Costume
 		},
-		["Cosmetic"] = {
+		["Cosmetic Effects"] = {
 			[60122] = true, -- Baby Spice
 			[27571] = true, -- Cascade of Roses (from Handful of Roses)
 			[51010] = true, -- Dire Brew
@@ -96,11 +98,11 @@ local defaults = {
 			[130]   = true, -- Slow Fall
 		},
 		["Divine Shield"] = {
-			[642]   = true, -- Divine Shield
+			[642]   = "PALADIN", -- Divine Shield
 		},
 		["Hellfire"] = {
-			[1949]  = true, -- Hellfire
-			[85403] = true, -- Hellfire (Demonology spec version)
+			[1949]  = "WARLOCK", -- Hellfire
+			[85403] = "WARLOCK", -- Hellfire (Demonology spec version)
 		},
 		["Shadowmourne"] = {
 			[73422] = true, -- Chaos Bane (Shadowmourne proc) (ret paladins want to cancel it)
@@ -110,11 +112,35 @@ local defaults = {
 
 ------------------------------------------------------------------------
 
+local groupOrder = {
+	["Invulnerability"]     = 1,
+	["Toy Controllers"]     = 2,
+	["Shapeshifts"]         = 3,
+	["Deathbringer's Will"] = 4,
+	["Cosmetic Effects"]    = 5,
+	["Slow Fall"]           = 6,
+	["Stealth"]             = 7,
+	["Divine Shield"]       = 8,
+	["Hellfire"]            = 9,
+	["Shadowmourne"]        = 10,
+}
+
 local buffList = { }
 
 local CANCELMYBUFFS_BINDING = "CLICK CancelMyBuffsButton:LeftButton"
 
 local CancelMyBuffs = LibStub("AceAddon-3.0"):NewAddon("CancelMyBuffs")
+
+function CancelMyBuffs:Print(text, ...)
+	if (...) then
+		if text:find("%%") then
+			text = text:format(...)
+		else
+			text = string.concat(" ", text, ...)
+		end
+	end
+	print("|cff33ff99CancelMyBuffs:|r", text)
+end
 
 function CancelMyBuffs:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("CancelMyBuffsDB", defaults, true)
@@ -129,7 +155,7 @@ function CancelMyBuffs:OnEnable()
 	self:SetupOptions()
 
 	if not GetBindingKey(CANCELMYBUFFS_BINDING) then
-		print("|cff33ff99CancelMyBuffs:|r", "No key binding set! Type \"/cmb\" for options.")
+		self:Print([[No key binding set! Type "/cmb" for options.]])
 	end
 
 	-- self:RegisterEvent("UNIT_AURA")
@@ -152,10 +178,9 @@ end
 ------------------------------------------------------------------------
 
 function CancelMyBuffs:SetupButton()
-	-- print("SetupButton")
 	local _, class = UnitClass("player")
 
-	local macrotext = "" -- "\n/run print(\"click\")"
+	local macrotext = ""
 	if self.db.profile.forms and (class == "DRUID" or class == "PRIEST" or class == "SHAMAN") then
 		macrotext = macrotext .. "\n/cancelform"
 	end
@@ -180,23 +205,24 @@ function CancelMyBuffs:SetupButton()
 			local buffs = self.db.global[group]
 			if buffs then
 				for id, enabled in pairs(buffs) do
+					if type(enabled) == "string" then
+						enabled = (enabled == class) or (enabled == race) or (enabled == faction)
+					end
 					if enabled then
 						local name, _, icon = GetSpellInfo(id)
-						if name then
+						if name and not buffList[name] then
 							buffList[name] = icon
+							macrotext = macrotext .. "\n/cancelaura " .. name
 						end
 					end
 				end
 			end
 		end
 	end
-	for buff in pairs(buffList) do
-		macrotext = macrotext .. "\n/cancelaura " .. buff
-	end
 	macrotext = macrotext:sub(2)
 
 	if macrotext:len() > 1000 then
-		print("|cff33ff99CancelMyBuffs:|r", "Too many buffs selected!")
+		self:Print("Too many buffs selected!")
 		macrotext = macrotext:sub(1, 1024):match("(.+)\n/[^\/]+$")
 	end
 
@@ -221,6 +247,16 @@ function CancelMyBuffs:SetupOptions()
 			self:SetupButton()
 		end,
 		args = {
+			addoninfo = {
+				name = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
+				type = "description",
+				order = 5,
+			},
+			spacer0 = {
+				name = " ",
+				type = "description",
+				order = 6,
+			},
 			keybinding = {
 				name = L["Key Binding"],
 				order = 10, width = "full",
@@ -251,6 +287,11 @@ function CancelMyBuffs:SetupOptions()
 					SaveBindings(GetCurrentBindingSet())
 				end,
 			},
+			spacer1 = {
+				name = " ",
+				type = "description",
+				order = 15,
+			},
 			mounts = {
 				name = L["Dismount"],
 				desc = L["Also dismount when cancelling buffs."],
@@ -275,6 +316,11 @@ function CancelMyBuffs:SetupOptions()
 				order = 50, width = "double",
 				type = "toggle",
 			},
+			spacer2 = {
+				name = " ",
+				type = "description",
+				order = 55,
+			},
 			buffGroups = {
 				name = L["Remove buffs"],
 				desc = L["Select which buffs to remove."],
@@ -295,51 +341,52 @@ function CancelMyBuffs:SetupOptions()
 
 	local t1, t2 = { }, { }
 	for groupName, groupBuffs in pairs(self.db.global) do
-		wipe(t1)
-		wipe(t2)
-		for id in pairs(groupBuffs) do
-			local name = GetSpellInfo(id)
-			if name then
-				t1[name] = true
-			end
-		end
-		for name in pairs(t1) do
-			table.insert(t2, name)
-		end
-		table.sort(t2)
 		self.options.args.buffGroups.args[groupName] = {
 			name = L[groupName],
-			desc = (#t2 > 1) and ("- " .. table.concat(t2, "\n- ")) or nil,
-			order = (groupName == "General") and 1 or nil,
+			desc = function()
+				wipe(t1)
+				wipe(t2)
+				for id, enabled in pairs(groupBuffs) do
+					if type(enabled) == "string" then
+						enabled = (enabled == class) or (enabled == race) or (enabled == faction)
+					end
+					if enabled then
+						local name, _, icon = GetSpellInfo(id)
+						if name and not t1[name] then
+							t1[name] = icon
+							table.insert(t2, name)
+						end
+					end
+				end
+				if #t2 > 0 then
+					table.sort(t2)
+					for i, v in ipairs(t2) do
+						t2[i] = "|T" .. t1[v] .. ":0|t " .. v
+					end
+					return table.concat(t2, "\n")
+				end
+			end,
+			order = groupOrder[groupName] or nil,
 			width = "double",
 			type = "toggle",
+			disabled = function()
+				wipe(t1)
+				wipe(t2)
+				for id, enabled in pairs(groupBuffs) do
+					if type(enabled) == "string" then
+						enabled = (enabled == class) or (enabled == race) or (enabled == faction)
+					end
+					if enabled then
+						local name, _, icon = GetSpellInfo(id)
+						if name and not t1[name] then
+							t1[name] = icon
+							table.insert(t2, name)
+						end
+					end
+				end
+				return #t2 == 0
+			end,
 		}
-	end
-
-	self.groupOptions = {
-		name = L["Buff Groups"],
-		type = "group",
-		args = {
-		},
-	}
-
-	for groupName, groupBuffs in pairs(self.db.global) do
-		local t = {
-			name = L[groupName],
-			type = "group",
-			args = {
-			}
-		}
-		for id in pairs(groupBuffs) do
-			local name, _, icon = GetSpellInfo(id)
-			if name then
-				t.args[name] = {
-					name = "|T" .. icon .. ":0|t " .. name,
-					type = "toggle",
-				}
-			end
-		end
-		self.groupOptions.args[groupName] = t
 	end
 
 	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("CancelMyBuffs", self.options)
@@ -350,6 +397,7 @@ function CancelMyBuffs:SetupOptions()
 
 	SLASH_CANCELMYBUFFS1 = "/cmb"
 	SlashCmdList.CANCELMYBUFFS = function()
+		InterfaceOptionsFrame_OpenToCategory(self.aboutPanel)
 		InterfaceOptionsFrame_OpenToCategory(self.optionsPanel)
 	end
 end
