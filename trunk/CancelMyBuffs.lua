@@ -65,12 +65,13 @@ local defaults = {
 		},
 		["Shapeshifts"] = {
 			[24732] = true, -- Bat Costume
-			[6406]  = "Alliance", -- Furbolg Form (from Dartol's Rod of Transformation) -- check prevents mounting?
+			[6406]  = "Alliance", -- Furbolg Form (from Dartol's Rod of Transformation)
 			[22736] = true, -- Gordok Ogre Suit
 			[58501] = true, -- Iron Boot Flask
 			[16591] = true, -- Noggenfogger Elixir (skeleton)
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
 			[61716] = true, -- Rabbit Costume (from Blossoming Branch)
+			[24723] = true, -- Skeleton Costume
 			[24740] = true, -- Wisp Costume
 		},
 		["Cosmetic Effects"] = {
@@ -88,7 +89,6 @@ local defaults = {
 			[24710] = true, -- Ninja Costume
 			[60106] = true, -- Old Spices
 			[24709] = true, -- Pirate Costume
-			[24723] = true, -- Skeleton Costume -- check prevents mounting?
 			[44755] = true, -- Snowflakes (from Handful of Snowflakes)
 			[61815] = true, -- Sprung! (from Spring Flowers)
 		},
