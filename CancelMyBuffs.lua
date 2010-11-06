@@ -2,7 +2,9 @@
 	CancelMyBuffs
 	Cancel unwanted buffs quickly and easily.
 	by Phanx < addons@phanx.net >
-	http://www.wowinterface.com/addons/
+	Copyright © Phanx. Do not redistribute. See LICENSE for details.
+	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
+	http://wow.curse.com/downloads/wow-addons/details/cancelmybuffs.aspx
 ----------------------------------------------------------------------]]
 
 local ADDON_NAME, ns = ...

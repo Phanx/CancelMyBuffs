@@ -13,7 +13,7 @@ of time. Then, when you press the key, all of the buffs you chose are
 cancelled. It also supports dismounting, exiting vehicles, cancelling 
 forms, and removing weapon buffs.
 
-Type /cmb for options, or find them in the Interface Options window. 
+Type ``/cmb`` for options, or find them in the Interface Options window. 
 You can also set the keybinding in the Blizzard keybindings UI.
 
 CancelMyBuffs was written in response to the annoying restrictions added
