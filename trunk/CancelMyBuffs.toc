@@ -5,8 +5,8 @@
 ## Notes: Quickly cancel unwanted buffs.
 ## Author: Phanx
 ## X-Email: addons@phanx.net
-## X-Copyright: Copyright 2010 Phanx.
-## X-License: Do not redistribute. See LICENSE.txt for details.
+## X-Copyright: Copyright © 2010 Phanx
+## X-License: Do Not Redistribute. See LICENSE.txt for details.
 ## X-Website: http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 ## X-Ace-Forum: 18773
 ## X-Curse-ProjectName: cancelmybuffs
