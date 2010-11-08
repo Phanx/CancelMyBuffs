@@ -9,7 +9,7 @@
 ## X-License: Do Not Redistribute. See LICENSE.txt for details.
 ## X-Website: http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 ## X-Ace-Forum: 18773
-## X-Curse-ProjectName: cancelmybuffs
+## X-Curse-Project-ID: cancelmybuffs
 ## X-WoWI-ID: 18447
 
 ## OptionalDependencies: Ace3, LibDataBroker-1.1, LibDBIcon-1.0, LibSink-2.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets
