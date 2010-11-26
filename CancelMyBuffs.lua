@@ -25,14 +25,16 @@ _G["BINDING_NAME_CLICK CancelMyBuffsButton:LeftButton"] = L["Cancel buffs"]
 
 local defaults = {
 	profile = {
-		forms = false,
-		mounts = false,
-		vehicles = false,
-		weaponBuffs = false,
-		buffGroups = {
-			["General"] = true,
-			["Shapeshift"] = true,
-			["Slow Fall"] = true,
+		[1] = {
+			forms = false,
+			mounts = false,
+			vehicles = false,
+			weaponBuffs = false,
+			buffGroups = {
+				["General"] = true,
+				["Shapeshift"] = true,
+				["Slow Fall"] = true,
+			},
 		},
 	},
 	global = {
@@ -48,8 +50,10 @@ local defaults = {
 			[1784]  = "ROGUE", -- Stealth
 			[1856]  = "ROGUE", -- Vanish -- check 11327
 		},
-		["Toy Controllers"] = {
+		["Controllers"] = {
+			[37868] = true, -- Arcano-Scorp Control
 			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
+			[30019] = true, -- Control Piece (Karazhan)
 			[49352] = true, -- Crashin' Thrashin' Racer Controller
 			[45440] = true, -- Steam Tonk Controller
 		},
@@ -93,6 +97,7 @@ local defaults = {
 			[24709] = true, -- Pirate Costume
 			[44755] = true, -- Snowflakes (from Handful of Snowflakes)
 			[61815] = true, -- Sprung! (from Spring Flowers)
+			[61781] = true, -- Turkey Feathers
 		},
 		["Slow Fall"] = {
 			[1706]  = true, -- Levitate
@@ -116,7 +121,7 @@ local defaults = {
 
 local groupOrder = {
 	["Invulnerability"]     = 1,
-	["Toy Controllers"]     = 2,
+	["Controllers"]     	= 2,
 	["Shapeshifts"]         = 3,
 	["Deathbringer's Will"] = 4,
 	["Cosmetic Effects"]    = 5,
@@ -183,16 +188,16 @@ function CancelMyBuffs:SetupButton()
 	local _, class = UnitClass("player")
 
 	local macrotext = ""
-	if self.db.profile.forms and (class == "DRUID" or class == "PRIEST" or class == "SHAMAN") then
+	if self.db.profile[1].forms and (class == "DRUID" or class == "PRIEST" or class == "SHAMAN") then
 		macrotext = macrotext .. "\n/cancelform"
 	end
-	if self.db.profile.mounts then
+	if self.db.profile[1].mounts then
 		macrotext = macrotext .. "\n/dismount"
 	end
-	if self.db.profile.vehicles then
+	if self.db.profile[1].vehicles then
 		macrotext = macrotext .. "\n/run if UnitHasVehicleUI(\"player\")then VehicleExit()end"
 	end
-	if self.db.profile.weaponBuffs and (class == "ROGUE" or class == "SHAMAN") then
+	if self.db.profile[1].weaponBuffs and (class == "ROGUE" or class == "SHAMAN") then
 		if not TemporaryEnchantFrame:IsShown() then
 			TempEnchant1:SetID(16)
 			TempEnchant2:SetID(17)
@@ -202,7 +207,7 @@ function CancelMyBuffs:SetupButton()
 	end
 
 	wipe(buffList)
-	for group, enabled in pairs(self.db.profile.buffGroups) do
+	for group, enabled in pairs(self.db.profile[1].buffGroups) do
 		if enabled then
 			local buffs = self.db.global[group]
 			if buffs then
@@ -242,10 +247,10 @@ function CancelMyBuffs:SetupOptions()
 		desc = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
 		type = "group",
 		get = function(t)
-			return self.db.profile[t[#t]]
+			return self.db.profile[1][t[#t]]
 		end,
 		set = function(t, v)
-			self.db.profile[t[#t]] = v
+			self.db.profile[1][t[#t]] = v
 			self:SetupButton()
 		end,
 		args = {
@@ -329,10 +334,10 @@ function CancelMyBuffs:SetupOptions()
 				order = 60,
 				type = "group", inline = true,
 				get = function(t) return
-					self.db.profile.buffGroups[t[#t]]
+					self.db.profile[1].buffGroups[t[#t]]
 				end,
 				set = function(t, v)
-					self.db.profile.buffGroups[t[#t]] = v
+					self.db.profile[1].buffGroups[t[#t]] = v
 					self:SetupButton()
 				end,
 				args = {
