@@ -2,9 +2,14 @@
 	CancelMyBuffs
 	Cancel unwanted buffs quickly and easily.
 	by Phanx < addons@phanx.net >
-	Copyright © Phanx. Do not redistribute. See LICENSE for details.
 	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 	http://wow.curse.com/downloads/wow-addons/details/cancelmybuffs.aspx
+
+	Copyright © 2010 Phanx
+	I, the copyright holder of this work, hereby release it into the public
+	domain. This applies worldwide. In case this is not legally possible: I
+	grant anyone the right to use this work for any purpose, without any
+	conditions, unless such conditions are required by law.
 ----------------------------------------------------------------------]]
 
 local ADDON_NAME, ns = ...
@@ -77,6 +82,7 @@ local defaults = {
 			[16591] = true, -- Noggenfogger Elixir (skeleton)
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
 			[61716] = true, -- Rabbit Costume (from Blossoming Branch)
+			[75724] = true, -- Seeds of Discord (from Ogre Disguise quest item)
 			[24723] = true, -- Skeleton Costume
 			[24740] = true, -- Wisp Costume
 		},
