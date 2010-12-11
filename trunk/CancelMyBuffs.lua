@@ -78,6 +78,7 @@ local defaults = {
 			[24732] = true, -- Bat Costume
 			[6406]  = "Alliance", -- Furbolg Form (from Dartol's Rod of Transformation)
 			[22736] = true, -- Gordok Ogre Suit
+			[88715] = true, -- Herbouflage (from Lifegiving Seed quest item)
 			[58501] = true, -- Iron Boot Flask
 			[16591] = true, -- Noggenfogger Elixir (skeleton)
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
