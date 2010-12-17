@@ -1,8 +1,10 @@
 ## CancelMyBuffs
 
-* by Phanx < addons@phanx.net >
-* http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
-* http://wow.curse.com/downloads/wow-addons/details/cancelmybuffs.aspx
+by Phanx < addons@phanx.net >
+Copyright © 2010 Phanx. Some rights reserved. See LICENSE.txt for details.
+http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
+http://wow.curse.com/downloads/wow-addons/details/cancelmybuffs.aspx
+
 
 ## Features
 
@@ -24,33 +26,20 @@ once you've done that, it is faster than hunting through buff icons to
 click off Hand of Protection. Plus, it works no matter which buff addon
 you use.
 
+
 ## Localization
 
-* Compatible with all locales.
-* Translated into English.
+Compatible with all locales.
+Translated into English.
 
 If you can provide translations for any locale, please contact me.
 
-## Bug Reports
-
-* [WoWInterface bug tracker](http://www.wowinterface.com/portal.php?uid=28751&a=listbugs)
-* [CurseForge bug tracker](http://wow.curseforge.com/addons/cancelmybuffs/tickets/?status=+&type=d)
-
-## Feature Requests
-
-* [WoWInterface feature tracker](http://www.wowinterface.com/portal.php?uid=28751&a=listfeatures)
-* [CurseForge feature tracker](http://wow.curseforge.com/addons/cancelmybuffs/tickets/?status=+&type=e)
 
 ## Feedback
 
-* [WoWInterface comments page](http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html#comments)
-* [WoWAce forum thread[(http://forums.curseforge.com/showthread.php?t=18773)
+Please use the ticket system on either download site report bugs or
+request features. Use the comment system only for general questions
+or comments.
 
-## License
-
-Copyright © 2010 Phanx
-
-I, the copyright holder of this work, hereby release it into the public
-domain. This applies worldwide. In case this is not legally possible: I
-grant anyone the right to use this work for any purpose, without any
-conditions, unless such conditions are required by law.
+If you need to contact me privately, you may do by private message
+on either download site, or by email at addons@phanx.net.
