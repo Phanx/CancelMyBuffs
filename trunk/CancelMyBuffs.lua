@@ -82,6 +82,7 @@ local defaults = {
 		},
 		["Quest Effects"] = {
 			[37868] = true, -- Arcano-Scorp Control
+			[77647] = true, -- Fel-Infused (from killing mobs in Dustwind Cave)
 			[75724] = true, -- Seeds of Discord (from Ogre Disguise quest item)
 		},
 		["Cosmetic Effects"] = {
