@@ -2,14 +2,9 @@
 	CancelMyBuffs
 	Cancel unwanted buffs quickly and easily.
 	by Phanx < addons@phanx.net >
+	Copyright © 2010 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 	http://wow.curse.com/downloads/wow-addons/details/cancelmybuffs.aspx
-
-	Copyright © 2010 Phanx
-	I, the copyright holder of this work, hereby release it into the public
-	domain. This applies worldwide. In case this is not legally possible: I
-	grant anyone the right to use this work for any purpose, without any
-	conditions, unless such conditions are required by law.
 ----------------------------------------------------------------------]]
 
 local ADDON_NAME, ns = ...
@@ -56,7 +51,6 @@ local defaults = {
 			[1856]  = "ROGUE", -- Vanish -- check 11327
 		},
 		["Controllers"] = {
-			[37868] = true, -- Arcano-Scorp Control
 			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
 			[30019] = true, -- Control Piece (Karazhan)
 			[49352] = true, -- Crashin' Thrashin' Racer Controller
@@ -83,9 +77,12 @@ local defaults = {
 			[16591] = true, -- Noggenfogger Elixir (skeleton)
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
 			[61716] = true, -- Rabbit Costume (from Blossoming Branch)
-			[75724] = true, -- Seeds of Discord (from Ogre Disguise quest item)
 			[24723] = true, -- Skeleton Costume
 			[24740] = true, -- Wisp Costume
+		},
+		["Quest Effects"] = {
+			[37868] = true, -- Arcano-Scorp Control
+			[75724] = true, -- Seeds of Discord (from Ogre Disguise quest item)
 		},
 		["Cosmetic Effects"] = {
 			[60122] = true, -- Baby Spice
@@ -102,6 +99,7 @@ local defaults = {
 			[24710] = true, -- Ninja Costume
 			[60106] = true, -- Old Spices
 			[24709] = true, -- Pirate Costume
+			[26157] = true, -- PX-238 Winter Wondervolt
 			[44755] = true, -- Snowflakes (from Handful of Snowflakes)
 			[61815] = true, -- Sprung! (from Spring Flowers)
 			[61781] = true, -- Turkey Feathers
