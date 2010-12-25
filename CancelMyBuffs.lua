@@ -55,6 +55,7 @@ local defaults = {
 			[30019] = true, -- Control Piece (Karazhan)
 			[49352] = true, -- Crashin' Thrashin' Racer Controller
 			[45440] = true, -- Steam Tonk Controller
+			[65451] = true, -- Using MiniZep Controller
 		},
 		["Deathbringer's Will"] = {
 			[71485] = true, -- Agility of the Vrykul
