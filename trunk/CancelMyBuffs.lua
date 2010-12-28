@@ -79,6 +79,7 @@ local defaults = {
 			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
 			[61716] = true, -- Rabbit Costume (from Blossoming Branch)
 			[24723] = true, -- Skeleton Costume
+			[21848] = true, -- Snowman
 			[24740] = true, -- Wisp Costume
 		},
 		["Quest Effects"] = {
@@ -246,31 +247,19 @@ end
 
 ------------------------------------------------------------------------
 
-function CancelMyBuffs:SetupOptions()
-	if self.options then return end
-
-	self.options = {
-		name = "CancelMyBuffs",
-		desc = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
+function CancelMyBuffs:GetOptionsForBindingGroup(i)
+	local groupID = i
+	local opt = {
+		name = self.db.profile[ groupID ].name or string.format( L["Group %d"], groupID ),
 		type = "group",
 		get = function(t)
-			return self.db.profile[1][t[#t]]
+			return self.db.profile[ groupID ][ t[ #t ] ]
 		end,
 		set = function(t, v)
-			self.db.profile[1][t[#t]] = v
+			self.db.profile[ groupID ][ t[ #t ] ] = v
 			self:SetupButton()
 		end,
 		args = {
-			addoninfo = {
-				name = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
-				type = "description",
-				order = 5,
-			},
-			spacer0 = {
-				name = " ",
-				type = "description",
-				order = 6,
-			},
 			keybinding = {
 				name = L["Key Binding"],
 				order = 10, width = "full",
@@ -341,28 +330,28 @@ function CancelMyBuffs:SetupOptions()
 				order = 60,
 				type = "group", inline = true,
 				get = function(t) return
-					self.db.profile[1].buffGroups[t[#t]]
+					self.db.profile[ groupID ].buffGroups[ t[ #t ] ]
 				end,
 				set = function(t, v)
-					self.db.profile[1].buffGroups[t[#t]] = v
+					self.db.profile[ groupID ].buffGroups[ t[ #t ] ] = v
 					self:SetupButton()
 				end,
 				args = {
 				},
 			},
-		},
+		}
 	}
 
 	local t1, t2 = { }, { }
 	for groupName, groupBuffs in pairs(self.db.global) do
-		self.options.args.buffGroups.args[groupName] = {
-			name = L[groupName],
+		opt.args.buffGroups.args[ groupName ] = {
+			name = L[ groupName ],
 			desc = function()
 				wipe(t1)
 				wipe(t2)
 				for id, enabled in pairs(groupBuffs) do
 					if type(enabled) == "string" then
-						enabled = (enabled == class) or (enabled == race) or (enabled == faction)
+						enabled = ( enabled == class ) or ( enabled == race ) or ( enabled == faction )
 					end
 					if enabled then
 						local name, _, icon = GetSpellInfo(id)
@@ -401,6 +390,41 @@ function CancelMyBuffs:SetupOptions()
 				return #t2 == 0
 			end,
 		}
+	end
+
+	return opt
+end
+
+function CancelMyBuffs:SetupOptions()
+	if self.options then return end
+
+	self.options = {
+		name = "CancelMyBuffs",
+		desc = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
+		type = "group",
+		args = {
+			addoninfo = {
+				name = L["CancelMyBuffs lets you quickly cancel unwanted buffs."],
+				type = "description",
+				order = 5,
+			},
+			spacer0 = {
+				name = " ",
+				type = "description",
+				order = 6,
+			},
+			bindGroups = {
+				name = L["Binding Groups"],
+				type = "group", childGroups = "tab",
+				order = 10,
+				args = {
+				},
+			},
+		},
+	}
+
+	for i in ipairs(self.db.profile) do
+		self.options.args.bindGroups.args[i] = self:GetOptionsForBindingGroup(i)
 	end
 
 	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("CancelMyBuffs", self.options)
