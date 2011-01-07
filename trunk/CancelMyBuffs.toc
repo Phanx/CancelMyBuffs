@@ -3,8 +3,8 @@
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly cancel unwanted buffs.
-## Author: Phanx
-## X-Email: addons@phanx.net
+## Author: Phanx, Akkorian
+## X-Email: akkorian@hotmail.com
 ## X-Copyright: Copyright © 2010 Phanx
 ## X-License: Some rights reserved. See LICENSE.txt for details.
 ## X-Website: http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
@@ -34,3 +34,4 @@ Libs\LibAboutPanel\LibAboutPanel.lua
 # Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
 
 CancelMyBuffs.lua
+Options.lua
