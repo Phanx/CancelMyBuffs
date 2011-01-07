@@ -70,6 +70,11 @@ local defaults = {
 			[71484] = true, -- Strength of the Taunka
 			[71561] = true, -- Strength of the Taunka ( Heroic )
 		},
+		["Flask of Enhancement"] = {
+			[79639] = true, -- Enhanced Agility
+			[79640] = true, -- Enhanced Intellect
+			[79638] = true, -- Enhanced Strength
+		},
 		["Shapeshifts"] = {
 			[24732] = true, -- Bat Costume
 			[6406]  = "Alliance", -- Furbolg Form ( from Dartol's Rod of Transformation )
