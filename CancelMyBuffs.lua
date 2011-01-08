@@ -170,6 +170,12 @@ function CancelMyBuffs:OnInitialize() -- self:Debug("OnInitialize")
 end
 
 function CancelMyBuffs:OnEnable() -- self:Debug("OnEnable")
+	hooksecurefunc(TemporaryEnchantFrame, "Hide", function()
+		TempEnchant1:SetID( 16 )
+		TempEnchant2:SetID( 17 )
+		TempEnchant3:SetID( 18 )
+	end)
+
 	self:SetupButton()
 
 	self:SetupOptions()
