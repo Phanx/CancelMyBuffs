@@ -9,7 +9,7 @@
 
 local ADDON_NAME, ns = ...
 
-local _, class, _, race, _, faction = UnitClass( "player" ), UnitRace( "player" ), UnitFactionGroup( "player" )
+local class, race, faction, _
 
 if not ns.L then ns.L = {} end
 local L = setmetatable( ns.L, { __index = function( t, k )
@@ -18,6 +18,12 @@ local L = setmetatable( ns.L, { __index = function( t, k )
 	t[ k ] = k
 	return k
 end } )
+
+L["Divine Plea"] = GetSpellInfo(54428)
+L["Divine Shield"] = GetSpellInfo(642)
+L["Hellfire"] = GetSpellInfo(1949)
+L["Slow Fall"] = GetSpellInfo(130)
+L["Water Walking"] = GetSpellInfo(546)
 
 _G["BINDING_HEADER_CANCELMYBUFFS"] = ADDON_NAME
 _G["BINDING_NAME_CLICK CancelMyBuffsButton:LeftButton"] = L["Cancel buffs"]
@@ -33,7 +39,7 @@ local defaults = {
 			vehicles = false,
 			weaponBuffs = false,
 			buffGroups = {
-				["General"] = true,
+				["Invulnerability"] = true,
 				["Shapeshift"] = true,
 				["Slow Fall"] = true,
 			},
@@ -58,23 +64,6 @@ local defaults = {
 			[49352] = true, -- Crashin' Thrashin' Racer Controller
 			[45440] = true, -- Steam Tonk Controller
 			[65451] = true, -- Using MiniZep Controller
-		},
-		["Deathbringer's Will"] = {
-			[71485] = true, -- Agility of the Vrykul
-			[71556] = true, -- Agility of the Vrykul (Heroic)
-			[71491] = true, -- Aim of the Iron Dwarves
-			[71559] = true, -- Aim of the Iron Dwarves (Heroic)
-			[71486] = true, -- Power of the Taunka
-			[71558] = true, -- Power of the Taunka (Heroic)
-			[71492] = true, -- Speed of the Vrykul
-			[71560] = true, -- Speed of the Vrykul (Heroic)
-			[71484] = true, -- Strength of the Taunka
-			[71561] = true, -- Strength of the Taunka (Heroic)
-		},
-		["Flask of Enhancement"] = {
-			[79639] = true, -- Enhanced Agility
-			[79640] = true, -- Enhanced Intellect
-			[79638] = true, -- Enhanced Strength
 		},
 		["Shapeshifts"] = {
 			[24732] = true, -- Bat Costume
@@ -119,6 +108,14 @@ local defaults = {
 			[16593] = true, -- Noggenfogger Elixir (slow fall)
 			[130]   = true, -- Slow Fall
 		},
+		["Water Walking"] = {
+			[8827]  = true, -- Elixir of Water Walking
+			[1706]  = true, -- Levitate
+			[546]   = true, -- Water Walking
+		},
+		["Divine Plea"] = {
+			[54428] = "PALADIN", -- Divine Plea
+		},
 		["Divine Shield"] = {
 			[642]   = "PALADIN", -- Divine Shield
 		},
@@ -126,8 +123,10 @@ local defaults = {
 			[1949]  = "WARLOCK", -- Hellfire
 			[85403] = "WARLOCK", -- Hellfire (Demonology spec version)
 		},
-		["Shadowmourne"] = {
-			[73422] = true, -- Chaos Bane (Shadowmourne proc) (ret paladins want to cancel it)
+		["Flask of Enhancement"] = {
+			[79639] = true, -- Enhanced Agility
+			[79640] = true, -- Enhanced Intellect
+			[79638] = true, -- Enhanced Strength
 		},
 	}
 }
@@ -135,8 +134,8 @@ local defaults = {
 ------------------------------------------------------------------------
 
 local buffList = { }
-
-local CANCELMYBUFFS_BINDING = "CLICK CancelMyBuffsButton:LeftButton"
+local buttons = { }
+local bindings = { }
 
 local CancelMyBuffs = LibStub( "AceAddon-3.0" ):NewAddon( "CancelMyBuffs" )
 
@@ -162,52 +161,84 @@ function CancelMyBuffs:Debug( text, ... )
 	print( "|cffff6666CancelMyBuffs:|r", text )
 end
 
-function CancelMyBuffs:OnInitialize() -- self:Debug("OnInitialize")
+function CancelMyBuffs:OnInitialize() -- self:Debug( "OnInitialize" )
 	self.db = LibStub( "AceDB-3.0" ):New( "CancelMyBuffsDB", defaults, true )
 
-	self.button = CreateFrame( "Button", "CancelMyBuffsButton", nil, "SecureActionButtonTemplate" )
-	self.button:RegisterForClicks( "AnyUp" )
+	self.buttons = buttons
+	self.bindings = bindings
 end
 
-function CancelMyBuffs:OnEnable() -- self:Debug("OnEnable")
-	hooksecurefunc(TemporaryEnchantFrame, "Hide", function()
+function CancelMyBuffs:OnEnable() -- self:Debug( "OnEnable" )
+	_, class = UnitClass( "player" )
+	_, race =UnitRace( "player" )
+	faction = UnitFactionGroup( "player" )
+
+	hooksecurefunc( TemporaryEnchantFrame, "Hide", function()
 		TempEnchant1:SetID( 16 )
 		TempEnchant2:SetID( 17 )
 		TempEnchant3:SetID( 18 )
-	end)
+	end )
 
-	self:SetupButton()
+	local warned
+	for i = 1, #self.db.profile do
+		self:SetupButton( i )
+
+		local binding = self.db.profile[ i ].binding
+		if not binding then
+			binding = GetBindingKey( bindings[ i ] )
+			self.db.profile[ i ].binding = binding
+		end
+		if not binding and not warned then
+			self:Print( [[No key binding set! Type "/cmb" for options.]] )
+			warned = true
+		else
+			SetBinding( binding, bindings[ i ] )
+		end
+	end
 
 	self:SetupOptions()
-
-	local key = self.db.profile[ 1 ].binding
-	if not key then
-		key = GetBindingKey( CANCELMYBUFFS_BINDING )
-		self.db.profile[ 1 ].binding = key
-	end
-	if not key then
-		self:Print( [[No key binding set! Type "/cmb" for options.]] )
-	else
-		SetBinding( key, CANCELMYBUFFS_BINDING )
-	end
 end
 
 ------------------------------------------------------------------------
 
-function CancelMyBuffs:SetupButton() -- self:Debug("SetupButton")
-	local _, class = UnitClass( "player" )
+function CancelMyBuffs:SetupButton( i )
+	-- self:Debug( "SetupButton", i )
 
-	local macrotext = ""
-	if self.db.profile[ 1 ].forms and ( class == "DRUID" or class == "PRIEST" or class == "SHAMAN" ) then
+	local bindGroup = self.db.profile[ i ]
+	if not bindGroup then return end
+
+	local name, attr_type, attr_macrotext
+	if ( i % 2 == 0 ) then
+		name, attr_type, attr_macrotext = "CancelMyBuffsButton" .. ( i - 1 ), "type2", "macrotext2"
+		bindings[ i ] = "CLICK " .. name .. ":RightButton"
+	else
+		name, attr_type, attr_macrotext = "CancelMyBuffsButton" .. i, "type1", "macrotext1"
+		bindings[ i ] = "CLICK " .. name .. ":LeftButton"
+	end
+
+	-- self:Debug( name, attr_type, attr_macrotext )
+	-- self:Debug( bindings[ i ] )
+
+	if not _G[ name ] then
+		buttons[ i ] = CreateFrame( "Button", name, nil, "SecureActionButtonTemplate" )
+		buttons[ i ]:RegisterForClicks( "AnyUp" )
+		-- self:Debug( "Created button" )
+	end
+
+	local macrotext = "" .. "\n/run print(\"click\")"
+	if bindGroup.forms and ( class == "DRUID" or class == "PRIEST" or class == "SHAMAN" ) then
 		macrotext = macrotext .. "\n/cancelform"
 	end
-	if self.db.profile[ 1 ].mounts then
+	
+	if bindGroup.mounts then
 		macrotext = macrotext .. "\n/dismount"
 	end
-	if self.db.profile[ 1 ].vehicles then
-		macrotext = macrotext .. "\n/run if UnitHasVehicleUI(\"player\")then VehicleExit()end"
+	
+	if bindGroup.vehicles then
+		macrotext = macrotext .. "\n/leavevehicle [@vehicle,exists]"
 	end
-	if self.db.profile[ 1 ].weaponBuffs and ( class == "ROGUE" or class == "SHAMAN" ) then
+	
+	if bindGroup.weaponBuffs and ( class == "ROGUE" or class == "SHAMAN" ) then
 		if not TemporaryEnchantFrame:IsShown() then
 			TempEnchant1:SetID( 16 )
 			TempEnchant2:SetID( 17 )
@@ -216,8 +247,13 @@ function CancelMyBuffs:SetupButton() -- self:Debug("SetupButton")
 		macrotext = macrotext .. "\n/click TempEnchant1 RightButton\n/click TempEnchant2 RightButton\n/click TempEnchant3 RightButton"
 	end
 
-	wipe( buffList )
-	for group, groupEnabled in pairs( self.db.profile[ 1 ].buffGroups ) do
+	if not buffList[ i ] then
+		buffList[ i ] = {}
+	else
+		wipe( buffList[ i ] )
+	end
+
+	for group, groupEnabled in pairs( bindGroup.buffGroups ) do
 		if type( groupEnabled ) == "string" then
 			groupEnabled = ( groupEnabled == class ) or ( groupEnabled == race ) or ( groupEnabled == faction )
 		end
@@ -239,13 +275,13 @@ function CancelMyBuffs:SetupButton() -- self:Debug("SetupButton")
 			end
 		end
 	end
-	macrotext = macrotext:sub( 2 ) -- .. "\n/run print(\"click\")"
+	macrotext = macrotext:sub( 2 )
 
 	if macrotext:len() > 1000 then
 		self:Print( "Too many buffs selected!" )
 		macrotext = macrotext:sub( 1, 1024 ):match( "( .+ )\n/[^\/]+$" )
 	end
 
-	self.button:SetAttribute( "type1", "macro" )
-	self.button:SetAttribute( "macrotext1", macrotext )
+	buttons[ i ]:SetAttribute( attr_type, "macro" )
+	buttons[ i ]:SetAttribute( attr_macrotext, macrotext )
 end

@@ -15,8 +15,6 @@ local L = ns.L
 
 local CancelMyBuffs = LibStub( "AceAddon-3.0" ):GetAddon( "CancelMyBuffs" )
 
-local CANCELMYBUFFS_BINDING = "CLICK CancelMyBuffsButton:LeftButton"
-
 ------------------------------------------------------------------------
 
 function CancelMyBuffs:GetOptionsForBindingGroup( i )
@@ -51,31 +49,33 @@ function CancelMyBuffs:GetOptionsForBindingGroup( i )
 				order = 10, width = "full",
 				type = "keybinding",
 				get = function()
-					return GetBindingKey( CANCELMYBUFFS_BINDING )
+					return GetBindingKey( self.bindings[ groupID ] )
 				end,
 				set = function( _, v )
 					-- clear any previous bindings
-					local prev1, prev2 = GetBindingKey( CANCELMYBUFFS_BINDING )
+					local prev1, prev2 = GetBindingKey( self.bindings[ groupID ] )
 					if prev1 == v then return end
 					if prev1 then SetBinding( prev1 ) end
 					if prev2 then SetBinding( prev2 ) end
 
-					if v and v:len() > 0 then
+					if v and v:len() == 0 then
+						v = nil
+					end
+
+					if v then
 						-- warn if overwriting an existing binding
 						local curr = GetBindingAction( v )
 						if curr and curr:len() > 0 then print( KEY_UNBOUND_ERROR:format( curr ) ) end
 
 						-- set new binding
-						SetBinding( v, CANCELMYBUFFS_BINDING )
+						SetBinding( v, self.bindings[ groupID ] )
 
-						-- save bindings in variables
-						self.db.profile[ groupID ].binding = v
+						-- restore second binding if there was one
+						if prev2 then SetBinding( prev2, self.bindings[ groupID ] ) end
 					end
 
-					-- restore second binding if there was one
-					if prev2 then SetBinding( prev2, CANCELMYBUFFS_BINDING ) end
-
 					-- save
+					self.db.profile[ groupID ].binding = v
 					SaveBindings( GetCurrentBindingSet() )
 				end,
 			},
