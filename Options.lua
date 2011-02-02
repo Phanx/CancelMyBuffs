@@ -140,7 +140,9 @@ function CancelMyBuffs:GetOptionsForBindingGroup( i )
 				wipe( t1 )
 				wipe( t2 )
 				for id, enabled in pairs( groupBuffs ) do
-					if type( enabled ) == "string" then
+					if type( enabled ) == "number" then
+						enabled = IsSpellKnown( enabled )
+					elseif type( enabled ) == "string" then
 						enabled = ( enabled == class ) or ( enabled == race ) or ( enabled == faction )
 					end
 					if enabled then
@@ -161,15 +163,17 @@ function CancelMyBuffs:GetOptionsForBindingGroup( i )
 			end,
 			width = "double",
 			type = "toggle",
-			disabled = function()
+			hidden = function()
 				wipe( t1 )
 				wipe( t2 )
+				local count = 0
 				for id, enabled in pairs( groupBuffs ) do
-					local count = 0
-					if type( enabled ) == "string" then
-						enabled = ( enabled == class ) or ( enabled == race ) or ( enabled == faction )
+					if type( enabled ) == "number" then
+						enabled = IsSpellKnown( enabled )
+					elseif type( enabled ) == "string" then
+						enabled = enabled == faction
 					end
-					if enabled then
+					if enabled == true then
 						count = count + 1
 					end
 				end
