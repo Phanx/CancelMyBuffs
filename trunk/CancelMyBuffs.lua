@@ -23,6 +23,7 @@ end } )
 L["Divine Plea"] = GetSpellInfo(54428)
 L["Divine Shield"] = GetSpellInfo(642)
 L["Hellfire"] = GetSpellInfo(1949)
+L["Mind Control"] = GetSpellInfo(605)
 L["Slow Fall"] = GetSpellInfo(130)
 L["Water Walking"] = GetSpellInfo(546)
 
@@ -48,86 +49,87 @@ local defaults = {
 	},
 	global = {
 		["Invulnerability"] = {
-			[46924] = "WARRIOR", -- Blade Storm
-			[19263] = "HUNTER", -- Deterrence
-			[1022]  = true, -- Hand of Protection
-			[45438] = "MAGE", -- Ice Block
+			[46924] = "WARRIOR",	-- Blade Storm
+			[19263] = "HUNTER",		-- Deterrence
+			[642]   = "PALADIN",	-- Divine Shield
+			[1022]  =  true,		-- Hand of Protection
+			[45438] = "MAGE",		-- Ice Block
 		},
 		["Stealth"] = {
-			[66]    = "MAGE", -- Invisibility
-			[58984] = "NightElf", -- Shadowmeld
-			[1784]  = "ROGUE", -- Stealth
-			[1856]  = "ROGUE", -- Vanish -- check 11327
+			[66]    = "MAGE",		-- Invisibility
+			[58984] = "NightElf",	-- Shadowmeld
+			[1784]  = "ROGUE",		-- Stealth
+			[1856]  = "ROGUE",		-- Vanish -- check 11327
 		},
 		["Controllers"] = {
-			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
-			[30019] = true, -- Control Piece (Karazhan)
-			[49352] = true, -- Crashin' Thrashin' Racer Controller
-			[45440] = true, -- Steam Tonk Controller
-			[65451] = true, -- Using MiniZep Controller
+			[75111] = true,	-- Blue Crashin' Thrashin' Racer Controller
+			[30019] = true,	-- Control Piece (Karazhan)
+			[49352] = true,	-- Crashin' Thrashin' Racer Controller
+			[45440] = true,	-- Steam Tonk Controller
+			[65451] = true,	-- Using MiniZep Controller
 		},
 		["Shapeshifts"] = {
-			[24732] = true, -- Bat Costume
-			[6406]  = "Alliance", -- Furbolg Form (from Dartol's Rod of Transformation)
-			[22736] = true, -- Gordok Ogre Suit
-			[88715] = true, -- Herbouflage (from Lifegiving Seed quest item)
-			[58501] = true, -- Iron Boot Flask
-			[16591] = true, -- Noggenfogger Elixir (skeleton)
-			[30167] = true, -- Red Ogre Costume (from Carved Ogre Idol)
-			[61716] = true, -- Rabbit Costume (from Blossoming Branch)
-			[24723] = true, -- Skeleton Costume
-			[21848] = true, -- Snowman
-			[24740] = true, -- Wisp Costume
+			[24732] = true,	-- Bat Costume
+			[6406]  = "Alliance",	-- Furbolg Form (from Dartol's Rod of Transformation)
+			[22736] = true,	-- Gordok Ogre Suit
+			[88715] = true,	-- Herbouflage (from Lifegiving Seed quest item)
+			[58501] = true,	-- Iron Boot Flask
+			[16591] = true,	-- Noggenfogger Elixir (skeleton)
+			[30167] = true,	-- Red Ogre Costume (from Carved Ogre Idol)
+			[61716] = true,	-- Rabbit Costume (from Blossoming Branch)
+			[24723] = true,	-- Skeleton Costume
+			[21848] = true,	-- Snowman
+			[24740] = true,	-- Wisp Costume
 		},
 		["Quest Effects"] = {
-			[37868] = true, -- Arcano-Scorp Control
-			[77647] = true, -- Fel-Infused (from killing mobs in Dustwind Cave)
-			[75724] = true, -- Seeds of Discord (from Ogre Disguise quest item)
+			[37868] = true,	-- Arcano-Scorp Control
+			[77647] = true,	-- Fel-Infused (from killing mobs in Dustwind Cave)
+			[75724] = true,	-- Seeds of Discord (from Ogre Disguise quest item)
 		},
 		["Cosmetic Effects"] = {
-			[60122] = true, -- Baby Spice
-			[27571] = true, -- Cascade of Roses (from Handful of Roses)
-			[51010] = true, -- Dire Brew
-			[24735] = true, -- Ghost Costume
-			[44185] = true, -- Jack-o'-Lanterned! (cast by Headless Horseman)
-			[44212] = true, -- Jack-o'-Lanterned! (from Weighted Jack-o'-Lantern)
-			[24712] = true, -- Leper Gnome Costume
-			[61819] = true, -- Manabonked! (from The Mischief Maker)
-			[61834] = true, -- Manabonked! (cast by Minigob Manabonk)
-			[69285] = true, -- Mohawked! -- check 58493
-			[42365] = true, -- Murloc Costume
-			[24710] = true, -- Ninja Costume
-			[60106] = true, -- Old Spices
-			[24709] = true, -- Pirate Costume
-			[26157] = true, -- PX-238 Winter Wondervolt
-			[44755] = true, -- Snowflakes (from Handful of Snowflakes)
-			[61815] = true, -- Sprung! (from Spring Flowers)
-			[61781] = true, -- Turkey Feathers
+			[60122] = true,	-- Baby Spice
+			[27571] = true,	-- Cascade of Roses (from Handful of Roses)
+			[51010] = true,	-- Dire Brew
+			[24735] = true,	-- Ghost Costume
+			[44185] = true,	-- Jack-o'-Lanterned! (cast by Headless Horseman)
+			[44212] = true,	-- Jack-o'-Lanterned! (from Weighted Jack-o'-Lantern)
+			[24712] = true,	-- Leper Gnome Costume
+			[61819] = true,	-- Manabonked! (from The Mischief Maker)
+			[61834] = true,	-- Manabonked! (cast by Minigob Manabonk)
+			[69285] = true,	-- Mohawked! -- check 58493
+			[42365] = true,	-- Murloc Costume
+			[24710] = true,	-- Ninja Costume
+			[60106] = true,	-- Old Spices
+			[24709] = true,	-- Pirate Costume
+			[26157] = true,	-- PX-238 Winter Wondervolt
+			[44755] = true,	-- Snowflakes (from Handful of Snowflakes)
+			[61815] = true,	-- Sprung! (from Spring Flowers)
+			[61781] = true,	-- Turkey Feathers
 		},
 		["Slow Fall"] = {
-			[1706]  = true, -- Levitate
-			[16593] = true, -- Noggenfogger Elixir (slow fall)
-			[130]   = true, -- Slow Fall
+			[1706]  = true,	-- Levitate
+			[16593] = true,	-- Noggenfogger Elixir (slow fall)
+			[130]   = true,	-- Slow Fall
 		},
 		["Water Walking"] = {
-			[8827]  = true, -- Elixir of Water Walking
-			[1706]  = true, -- Levitate
-			[546]   = true, -- Water Walking
+			[8827]  = true,	-- Elixir of Water Walking
+			[1706]  = true,	-- Levitate
+			[546]   = true,	-- Water Walking
 		},
 		["Divine Plea"] = {
-			[54428] = "PALADIN", -- Divine Plea
-		},
-		["Divine Shield"] = {
-			[642]   = "PALADIN", -- Divine Shield
+			[54428] = "PALADIN",	-- Divine Plea
 		},
 		["Hellfire"] = {
-			[1949]  = "WARLOCK", -- Hellfire
-			[85403] = "WARLOCK", -- Hellfire (Demonology spec version)
+			[1949]  = "WARLOCK",	-- Hellfire
+			[85403] = "WARLOCK",	-- Hellfire (Demonology spec version)
+		},
+		["Mind Control"] = {
+			[605]   = "PRIEST",		-- Mind Control
 		},
 		["Flask of Enhancement"] = {
-			[79639] = true, -- Enhanced Agility
-			[79640] = true, -- Enhanced Intellect
-			[79638] = true, -- Enhanced Strength
+			[79639] = true,	-- Enhanced Agility
+			[79640] = true,	-- Enhanced Intellect
+			[79638] = true,	-- Enhanced Strength
 		},
 	}
 }
