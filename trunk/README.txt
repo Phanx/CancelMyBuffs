@@ -53,8 +53,11 @@ Localization
 CancelMyBuffs is compatible with English, Deutsch, Español, Français, 
 Русский, 한국어, 简体中文, and 正體中文 game clients.
 
-CancelMyBuffs is currently translated into English. If you can provide 
-translations for any locale, send me a PM.
+CancelMyBuffs is currently translated into English and Español. If you'd
+like to add translations for your language, please use the localization
+system on CurseForge:
+
+http://wow.curseforge.com/addons/cancelmybuffs/localization/
 
 
 Feedback

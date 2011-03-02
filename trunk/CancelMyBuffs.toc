@@ -1,8 +1,10 @@
 ## Interface: 40000
-## Version: 4.0.3.wowi:revision
+## Version: 4.0.6.wowi:revision
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly cancel unwanted buffs.
+## Notes-esES: Cancelar los beneficios no deseados rápidamente con un teclado.
+## Notes-esMX: Cancelar los beneficios no deseados rápidamente con un teclado.
 ## Author: Phanx, Akkorian
 ## X-Email: akkorian@hotmail.com
 ## X-Copyright: Copyright © 2010–2011 Phanx
