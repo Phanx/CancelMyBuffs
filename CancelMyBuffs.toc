@@ -37,7 +37,7 @@ Libs\LibAboutPanel\LibAboutPanel.lua
 # Libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
 # Libs\AceGUI-3.0-SharedMediaWidgets\widget.xml
 
-Locales\esMX.lua
+Locales\Locale-esMX.lua
 
 CancelMyBuffs.lua
 Options.lua

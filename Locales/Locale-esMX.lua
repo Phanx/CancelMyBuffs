@@ -46,7 +46,7 @@ ns.L = {
 	["New buff group"] = "Nuevo grupo",
 	["Add a buff"] = "Añadir un beneficio",
 	["Remove buffs"] = "Eliminar beneficios",
-	["Select which buffs to remove."] = "Seleccione los beneficios para eliminar.
+	["Select which buffs to remove."] = "Seleccione los beneficios para eliminar.",
 	["Uncheck a buff to delete it from this group."] = "Desmarque un beneficio para eliminar por este grupo.",
-	
+
 }
