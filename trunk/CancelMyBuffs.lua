@@ -28,9 +28,6 @@ L["Slow Fall"] = GetSpellInfo(130)
 L["Stealth"] = GetSpellInfo(1784)
 L["Water Walking"] = GetSpellInfo(546)
 
-_G["BINDING_HEADER_CANCELMYBUFFS"] = ADDON_NAME
-_G["BINDING_NAME_CLICK CancelMyBuffsButton:LeftButton"] = L["Cancel buffs"]
-
 ------------------------------------------------------------------------
 
 local defaults = {
