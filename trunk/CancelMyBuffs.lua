@@ -227,7 +227,7 @@ function CancelMyBuffs:SetupButton( i )
 		-- self:Debug( "Created button" )
 	end
 
-	local macrotext = "" .. "\n/run print(\"click\")"
+	local macrotext = "" -- .. "\n/run print(\"click\")"
 	if bindGroup.forms and ( class == "DRUID" or class == "PRIEST" or class == "SHAMAN" ) then
 		macrotext = macrotext .. "\n/cancelform"
 	end

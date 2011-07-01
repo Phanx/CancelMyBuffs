@@ -1,5 +1,5 @@
-## Interface: 40100
-## Version: 4.1.0.wowi:revision
+## Interface: 40200
+## Version: 4.2.0.wowi:revision
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly cancel unwanted buffs.
@@ -41,4 +41,4 @@ Locales\Locale-esMX.lua
 
 CancelMyBuffs.lua
 Options.lua
-Options-New.lua
+# Options-New.lua
