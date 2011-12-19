@@ -5,7 +5,7 @@
 	Maintained by Akkorian <akkorian@hotmail.com>
 	Copyright © 2010–2011 Phanx. Some rights reserved. See LICENSE.txt for details.
 	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
-	http://wow.curse.com/downloads/wow-addons/details/cancelmybuffs.aspx
+	http://www.curse.com/addons/wow/cancelmybuffs
 ------------------------------------------------------------------------
 	Localization: Español (AL & EU) | Spanish (Latin America y Europa)
 	Last Updated: 2011-01-25 by Akkorian
