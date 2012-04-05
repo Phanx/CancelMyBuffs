@@ -171,6 +171,7 @@ function addon:OnProfileLoad()
 		--	vehicles    -- boolean - whether to exit the vehicle
 		--  weaponBuffs -- boolean - whether to remove weapon buffs
 		}
+		self:Print(L[[[Default configuration loaded. Type "/cmb" to bind a key or change settings.]]])
 	end
 
 	for bindingName in pairs(self.db.profile.bindings) do
@@ -218,6 +219,25 @@ function addon:Debug(str, ...)
 		print("|cffff9999CMB2:|r", str:format(...))
 	else
 		print("|cffff9999CMB2:|r", str, ...)
+	end
+end
+
+function addon:Print(str, ...)
+	local noPrefix
+	if type(str) == "boolean" and str then
+		str = select(1, ...)
+		noPrefix = true
+	end
+	if type(str) == "string" and str:match("%%[dsx%d%.]") then
+		if noPrefix then
+			print("|cffffcc00CancelMyBuffs:|r", str:format(select(2, ...)))
+		else
+			print("|cffffcc00CancelMyBuffs:|r", str:format(...))
+		end
+	elseif noPrefix then
+		print("|cffffcc00CancelMyBuffs:|r", str, select(2, ...))
+	else
+		print("|cffffcc00CancelMyBuffs:|r", str, ...)
 	end
 end
 

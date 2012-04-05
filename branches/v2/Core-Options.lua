@@ -86,7 +86,7 @@ function addon:LoadOptions()
 			" ",
 			"Bindings are stored on a per-profile basis. Buffs and buff groups are stored on a per-account basis, so they are available to all profiles.",
 			" ",
-			"If you encounter any problems, |cffffff00please|r report them on the WoWInterface downlod page! I don't have a lot of time to test every possible combination of settings, so I need your help to make sure there aren't any bugs.",
+			"If you encounter any problems, |cffffff00please|r report them! I don't have a lot of time to test every possible combination of settings, so I need your help to make sure there aren't any bugs.",
 			" ",
 			"I also welcome feedback on the options layout. Feel free to let me know which parts of the menus are confusing, or could be better arranged.",
 		}
@@ -97,6 +97,13 @@ function addon:LoadOptions()
 				type = "description",
 			}
 		end
+		self.options.args.about.args[tostring(#aboutLines + 1)] = {
+			order = #aboutLines + 1
+			name = "Post feedback here:",
+			type = "input",
+			get = function() return "http://www.wowinterface.com/forums/showthread.php?t=43157" end,
+			set = function() end,
+		}
 	end
 
 
