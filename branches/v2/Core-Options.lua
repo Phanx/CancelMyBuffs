@@ -98,7 +98,7 @@ function addon:LoadOptions()
 			}
 		end
 		self.options.args.about.args[tostring(#aboutLines + 1)] = {
-			order = #aboutLines + 1
+			order = #aboutLines + 1,
 			name = "Post feedback here:",
 			type = "input",
 			get = function() return "http://www.wowinterface.com/forums/showthread.php?t=43157" end,

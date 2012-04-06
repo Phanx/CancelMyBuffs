@@ -171,7 +171,7 @@ function addon:OnProfileLoad()
 		--	vehicles    -- boolean - whether to exit the vehicle
 		--  weaponBuffs -- boolean - whether to remove weapon buffs
 		}
-		self:Print(L[[[Default configuration loaded. Type "/cmb" to bind a key or change settings.]]])
+		self:Print(L["Default configuration loaded. Type \"/cmb\" to bind a key or change settings."])
 	end
 
 	for bindingName in pairs(self.db.profile.bindings) do
