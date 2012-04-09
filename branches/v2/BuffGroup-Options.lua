@@ -214,3 +214,8 @@ do
 		return options
 	end
 end
+
+function addon:AddOptionsForBuff(groupName, buffID)
+	options.args.buffs.args[tostring(buffID)] = self:GetBuffOptions(groupName, buffID)
+	return true
+end

@@ -103,6 +103,19 @@ function addon:AddBuffToGroup(groupName, buffName)
 			buffName, _, buffIcon = GetSpellInfo(buffID)
 		end
 	end
+	if not buffID then
+		for i = 1, 40 do
+			local name, _, icon, _, _, _, _, _, _, _, id = UnitBuff("player", i)
+			if not name then
+				break
+			end
+			if name == buffName then
+				buffID = id
+				buffIcon = icon
+				break
+			end
+		end
+	end
 
 	if not buffIcon then
 		return false, string.format(L["%s does not appear to be a valid spell ID or spell name."], buffName or buffID)
@@ -114,7 +127,9 @@ function addon:AddBuffToGroup(groupName, buffName)
 	self.spellStrings[buffID] = text
 	self.spellStringsDisabled[buffID] = "|cff999999" .. text .. "|r"
 
-	self.db.global.buffGroups[groupName][buffID] = self:GetBuffOptions(groupName, buffID)
+	self.db.global.buffGroups[groupName][buffID] = true
+
+	self:AddOptionsForBuff(groupName, buffID)
 
 	return true
 end
