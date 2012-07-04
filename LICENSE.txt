@@ -1,34 +1,46 @@
-CancelMyBuffs
-by Phanx <addons@phanx.net>
-http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
-http://www.curse.com/addons/wow/cancelmybuffs
+Copyright (c) 2010 Phanx <addons@phanx.net>
 
-Copyright � 2010�2011 Phanx
+The contents of this softare, including any associated documentation
+files, and excluding any third-party resources, are copyrighted to its
+author(s) under United States copyright law and various international
+treaties. This software is provided "as is" and free of charge.
 
-The contents of this software, excluding third-party resources, are
-copyrighted to its author(s) with all rights reserved, under United States
-and international copyright law. Copyright law specifices certain rights
-and restrictions persuant to your use of this software. The author(s) of
-this software also grant(s) you several additional rights. In summary:
+By downloading, installing, using, copying, modifying, or distributing
+this software, ou agree to the following license terms:
 
-1. You MAY download and run this software as a user interface addon
-   inside the World of Warcraft game client.
+1. You MAY use this software for any purpose.
 
-2. You MAY make modifications to your local copy of this software for
-   your own private use.
+2. You MAY copy and modify this software for personal use only.
 
-3. You MAY distribute a whole and unaltered copy of this software as
-   part of a compilation released through Curse.com, CurseForge.com,
-   WoWAce.com, or WoWInterface.com.
+3. You MAY distribute a WHOLE AND UNMODIFIED copy of this software as
+   part of a collective work (such as a "compilation", "addon pack", or
+   "premade UI") distributed through Curse.com, CurseForge.com,
+   WowAce.com, and/or WoWInterface.com. This permission may be revoked
+   at any time.
 
-4. You MAY NOT distribute this software in any other way, with or
-   without modifications, without prior written permission from its
-   author(s).
+4. You MAY use source code from this software, in part or in whole,
+   modified or unmodified, for any purpose, provided that the names
+   of this software and/or its author(s) do not appear in the title,
+   source code, file names, or documentation of any derivitave works.
+   This permission does not grant you any license to the copyright
+   held by the author(s) of this software.
 
-5. You MAY use source code from this software for any purpose, provided
-   that the names of this software and/or its author(s) are not used to
-   promote your project, and do not appear in the title, source code, or
-   file names of your project, outside of an optional credits notation.
+5. You MAY NOT use the names of this software and/or its author(s) to
+   endorse or promote your collective or deriviave work without prior
+   written permission from the author(s). Simple attributions (such as a
+   credits notation or download link) are permitted, but not required.
+
+6. You MAY NOT distribute this software in any other way, in whole or in
+   part, with or without modifications, without prior written permission
+   from the author(s).
 
 All rights not explicitly addressed in this license are reserved by the
 copyright holder(s).
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
