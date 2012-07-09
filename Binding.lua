@@ -107,7 +107,7 @@ do
 
 		local bindingDB = self.db.profile.bindings[bindingName]
 
-		local macrotext = "\n/run print('" .. bindingName .. "')"
+		local macrotext = "\n"--/run print('" .. bindingName .. "')"
 
 		if bindingDB.forms and self.hasForms then
 			macrotext = macrotext .. "\n/cancelform"
