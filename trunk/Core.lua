@@ -1,3 +1,12 @@
+--[[--------------------------------------------------------------------
+	CancelMyBuffs
+	Quickly and easily remove unwanted buffs using keybindings.
+	Copyright (c) 2010-2012 Phanx <addons@phanx.net>. All rights reserved.
+	See the accompanying README and LICENSE files for more information.
+	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
+	http://www.curse.com/addons/wow/cancelmybuffs
+----------------------------------------------------------------------]]
+
 local _, addon = ...
 
 local L = setmetatable({}, { __index = function(L, k)
@@ -25,7 +34,7 @@ function addon:OnLoad()
 		}
 	}
 
-	self.db = LibStub("AceDB-3.0"):New("CancelMyBuffsDB2", defaults, true)
+	self.db = LibStub("AceDB-3.0"):New("CancelMyBuffsDB", defaults, true)
 
 	self.db.RegisterCallback(self, "OnProfileChanged", "OnProfileLoad")
 	self.db.RegisterCallback(self, "OnProfileCopied", "OnProfileLoad")
@@ -111,7 +120,6 @@ function addon:OnLoad()
 		}
 		self.db.global.buffGroups["Hellfire"] = {
 			[1949]  = 1949,  -- Hellfire [WARLOCK]
-			[85403] = 85403, -- Hellfire (Demonology version) [WARLOCK]
 		}
 		self.db.global.buffGroups["Mind Control"] = {
 			[605]   = 605, -- Mind Control [PRIEST]
@@ -126,8 +134,8 @@ function addon:OnLoad()
 		for id in pairs(groupBuffs) do
 			if type(id) == "number" then
 				local name, _, icon = GetSpellInfo(id)
-				local text = string.format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", icon, name)
 				if name then
+					local text = string.format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", icon, name)
 					self.spellNames[id] = name
 					self.spellIcons[id] = icon
 					self.spellStrings[id] = text
