@@ -15,32 +15,22 @@ keybindings.
 
 It was written in response to the annoying restrictions Blizzard added
 in WoW 4.0 (Cataclysm) that prevented most buff addons from letting you
-cancel buffs on right-click. It works by setting up key bindings ahead
-of time that will cancel specific buffs when activated.
-
-You simply choose which buffs you want to remove, add them to a group,
-and bind a key to the group. When you press the chosen key, all of the
-buffs in that group are removed.
+cancel buffs on right-click. With CancelMyBuffs, you simply choose which
+buffs you want to remove, add them to a group, and bind a key to the
+group. When you press the chosen key, all of the buffs in that group are
+removed. Dismounting, leaving vehicles, leaving shapeshift forms, and
+removing weapon buffs are also supported.
 
 For example, I have Ctrl+X bound to a CancelMyBuffs binding that cancels
-all Slow Fall and Water Walking effects. A tank may find it useful to
-bind a key to cancel Hand of Protection and other similar effects.
+all Slow Fall and Water Walking effects, dismounts me, leaves my vehicle,
+and cancels my shapeshift form. Tanks may find it useful to bind a key
+to cancel Hand of Protection and other similar effects.
 
 
 Usage
 -----
 
 Type "/cmb" for options, or find them in the Interface Options window.
-
-You can create as many different groups as you want, each including as
-many buffs as you want (up to an internal limit of 1024 characters for
-all of the buff names and removal commands).
-
-You can choose whether a buff should always be included in a group, or
-only included on some classes, or only if your character can cast it.
-
-CancelMyBuffs also supports dismounting, leaving vehicles, leaving
-shapeshift forms, and removing weapon buffs.
 
 Key bindings are saved on a per-profile basis. Buffs and buff groups
 are saved globally, so you don't have to set them up all over again for
