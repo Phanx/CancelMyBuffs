@@ -126,18 +126,19 @@ function addon:LoadOptions()
 		self.options.args.buffGroups.args[groupName] = self:GetBuffGroupOptions(groupName)
 	end
 
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("CancelMyBuffs2", self.options)
+	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("CancelMyBuffs", self.options)
 
 	local dialog = LibStub("AceConfigDialog-3.0")
 	self.optionsPanels = {
-		bindings = dialog:AddToBlizOptions("CancelMyBuffs2", "CancelMyBuffs2", nil, "bindings"),
-		buffGroups = dialog:AddToBlizOptions("CancelMyBuffs2", L["Buff Groups"], "CancelMyBuffs2", "buffGroups"),
-		profiles = dialog:AddToBlizOptions("CancelMyBuffs2", self.options.args.profiles.name, "CancelMyBuffs2", "profiles"),
-		about = dialog:AddToBlizOptions("CancelMyBuffs2", L["About"], "CancelMyBuffs2", "about"),
+		bindings = dialog:AddToBlizOptions("CancelMyBuffs", "CancelMyBuffs", nil, "bindings"),
+		buffGroups = dialog:AddToBlizOptions("CancelMyBuffs", L["Buff Groups"], "CancelMyBuffs", "buffGroups"),
+		profiles = dialog:AddToBlizOptions("CancelMyBuffs", self.options.args.profiles.name, "CancelMyBuffs", "profiles"),
+		about = dialog:AddToBlizOptions("CancelMyBuffs", L["About"], "CancelMyBuffs", "about"),
 	}
 
-	SLASH_CMBTWO1 = "/cmb2"
-	SlashCmdList.CMBTWO = function()
+	SLASH_CANCELMYBUFFS1 = "/cmb"
+	SLASH_CANCELMYBUFFS2 = "/cancelmybuffs"
+	SlashCmdList.CANCELMYBUFFS = function()
 		InterfaceOptionsFrame_OpenToCategory(self.optionsPanels.about)
 		InterfaceOptionsFrame_OpenToCategory(self.optionsPanels.bindings)
 	end
