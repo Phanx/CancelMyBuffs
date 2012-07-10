@@ -248,5 +248,3 @@ function addon:Print(str, ...)
 		print("|cffffcc00CancelMyBuffs:|r", str, ...)
 	end
 end
-
-_G.CMB2 = addon
