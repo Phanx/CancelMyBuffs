@@ -149,7 +149,7 @@ function addon:GetBindingOptions(name)
 			},
 			key = {
 				order = 2,
-				name = "",
+				name = KEY_BINDING,
 				desc = L["Press a key to assign it to this binding."],
 				type = "keybinding",
 				arg = bindingName,

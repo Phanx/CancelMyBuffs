@@ -11,13 +11,15 @@ local _, addon = ...
 local L = addon.L
 
 function addon:NewBinding(bindingName)
+	if bindingName == nil then bindingName = "" end
 	self:Debug("NewBinding", bindingName)
 
 	if type(bindingName) ~= "string" then
-		return false, "Name must be a string."
-	end
-	if self.db.profile.bindings[bindingName] then
-		return false, "The specified name is already in use."
+		return false, "Binding name must be a string." -- Not localized because this cannot happen through AceConfig.
+	elseif bindingName:trim():len() < 1 then
+		return false, L["Binding names cannot be blank. You must enter at least one non-whitespace character to create a new binding."]
+	elseif self.db.profile.bindings[bindingName] then
+		return false, L["That name is already used by another binding."]
 	end
 
 	--------------------------------------------------------------------
@@ -146,7 +148,16 @@ do
 		macrotext = macrotext:sub(2)
 
 		if macrotext:len() > 1024 then
-			-- TODO: alert user that the macro is too long
+			if not self.lastAlert then
+				self.lastAlert = {}
+			end
+
+			local now = GetTime()
+			if GetTime() - (self.lastAlert[bindingName] or 0) > 30 then
+				self:Print(string.format(L["The %s binding includes too many buffs! Some buffs may not be removed. Try selecting fewer buff groups, removing some unused buffs from your buff groups, or creating a second binding."], bindingName))
+				self.lastAlert[bindingName] = now
+			end
+
 			macrotext = macrotext:sub(1, 1024):match("(.+)\n/[^\/]+$")
 		end
 
@@ -175,7 +186,7 @@ function addon:SetBindingKey(bindingName, key)
 
 	local db = addon.db.profile.bindings[bindingName]
 	if not db then
-		return false, string.format(L["Binding %s not found."], bindingName)
+		return false, string.format("Binding %s not found.", bindingName) -- Not localized because this cannot happen through AceConfig.
 	end
 
 	local name = self.db.profile.bindings[bindingName].name
