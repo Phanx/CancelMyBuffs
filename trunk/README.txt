@@ -41,7 +41,7 @@ Localization
 ------------
 
 Compatible with English, Deutsch, Español (EU), Español (AL), Français,
-Italiano, Português, Русский, 한국어, 简体中文, and 正體中文 game clients.
+Italiano, Português, Русский, 한국어, 简体中文, and 繁體中文 game clients.
 
 Translated into English.
 
@@ -61,7 +61,7 @@ Feature requests or other suggestions:
 	Submit a feature request ticket system on either download page.
 
 General questions or comments:
-	Post a comment on either download page.
+	Post a comment on the WoWInterface download page.
 
 If you need to contact me privately for a reason other than those listed
 above, you can send me a private message on either download site, or

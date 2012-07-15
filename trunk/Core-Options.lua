@@ -7,7 +7,7 @@
 	http://www.curse.com/addons/wow/cancelmybuffs
 ----------------------------------------------------------------------]]
 
-local _, addon = ...
+local CANCELMYBUFFS, addon = ...
 local L = addon.L
 
 function addon:LoadOptions()
@@ -21,12 +21,12 @@ function addon:LoadOptions()
 			bindings = {
 				order = 1,
 				name = L["Bindings"],
-				desc = L["Add, remove, and configure bindings for cancelling buffs. These settings are stored on a per-profile basis."],
+				desc = L["Add, remove, and configure bindings for removing buffs. These settings are stored on a per-profile basis."],
 				type = "group",
 				args = {
 					notes = {
 						order = 1,
-						name = L["Add, remove, and configure bindings for cancelling buffs. These settings are stored on a per-profile basis."],
+						name = L["Add, remove, and configure bindings for removing buffs. These settings are stored on a per-profile basis."],
 						type = "description", cmdHidden = true, dropdownHidden = true,
 					},
 					spacer = {
@@ -38,16 +38,13 @@ function addon:LoadOptions()
 						order = 3,
 						width = "double",
 						name = L["New binding"],
-						desc = L["Create a new binding with this name."],
+						desc = L["Create a new binding with the specified name."],
 						type = "input",
 						validate = function(info, name)
-							if name and #name > 0 then
-								return self:NewBinding(name)
-							else
-								return false, L["Binding names cannot be blank. You must enter at least one letter to create a new binding."]
-							end
+							return self:NewBinding(name)
 						end,
 						set = function(info, name)
+							-- Do nothing, since it was already handled in validate.
 						end,
 					}
 				},
@@ -70,51 +67,19 @@ function addon:LoadOptions()
 					new = {
 						order = 3,
 						name = L["New buff group"],
-						desc = L["Create a new buff group with this name."],
+						desc = L["Create a new buff group with the specified name."],
 						type = "input",
+						validate = function(info, name)
+							return self:NewBuffGroup(name)
+						end,
 						set = function(info, name)
-							self:NewBuffGroup(name)
+							-- Do nothing, since it was already handled in validate.
 						end,
 					}
 				}
-			},
-			about = {
-				order = 4,
-				name = L["About"],
-				type = "group",
-				args = {},
 			}
 		}
 	}
-
-	do
-		local aboutLines = {
-			"This is a |cffffff00BETA|r version of CancelMyBuffs. It has been rewritten from the ground up, with a focus on configurability.",
-			" ",
-			"Bindings are now unlimited, so you can have as many as you want. Buffs and buff groups can be configured in-game, including limiting buffs to certain classes.",
-			" ",
-			"Bindings are stored on a per-profile basis. Buffs and buff groups are stored on a per-account basis, so they are available to all profiles.",
-			" ",
-			"If you encounter any problems, |cffffff00please|r report them! I don't have a lot of time to test every possible combination of settings, so I need your help to make sure there aren't any bugs.",
-			" ",
-			"I also welcome feedback on the options layout. Feel free to let me know which parts of the menus are confusing, or could be better arranged.",
-		}
-		for i, text in ipairs(aboutLines) do
-			self.options.args.about.args[tostring(i)] = {
-				order = i,
-				name = text,
-				type = "description",
-			}
-		end
-		self.options.args.about.args[tostring(#aboutLines + 1)] = {
-			order = #aboutLines + 1,
-			name = "Post feedback here:",
-			type = "input",
-			get = function() return "http://www.wowinterface.com/forums/showthread.php?t=43157" end,
-			set = function() end,
-		}
-	end
-
 
 	self.options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db)
 	self.options.args.profiles.order = 3
@@ -126,14 +91,14 @@ function addon:LoadOptions()
 		self.options.args.buffGroups.args[groupName] = self:GetBuffGroupOptions(groupName)
 	end
 
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("CancelMyBuffs", self.options)
+	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable(CANCELMYBUFFS, self.options)
 
 	local dialog = LibStub("AceConfigDialog-3.0")
 	self.optionsPanels = {
-		bindings = dialog:AddToBlizOptions("CancelMyBuffs", "CancelMyBuffs", nil, "bindings"),
-		buffGroups = dialog:AddToBlizOptions("CancelMyBuffs", L["Buff Groups"], "CancelMyBuffs", "buffGroups"),
-		profiles = dialog:AddToBlizOptions("CancelMyBuffs", self.options.args.profiles.name, "CancelMyBuffs", "profiles"),
-		about = dialog:AddToBlizOptions("CancelMyBuffs", L["About"], "CancelMyBuffs", "about"),
+		bindings = dialog:AddToBlizOptions(CANCELMYBUFFS, CANCELMYBUFFS, nil, "bindings"),
+		buffGroups = dialog:AddToBlizOptions(CANCELMYBUFFS, L["Buff Groups"], CANCELMYBUFFS, "buffGroups"),
+		profiles = dialog:AddToBlizOptions(CANCELMYBUFFS, self.options.args.profiles.name, CANCELMYBUFFS, "profiles"),
+		about = LibStub("LibAboutPanel").new(CANCELMYBUFFS, CANCELMYBUFFS),
 	}
 
 	SLASH_CANCELMYBUFFS1 = "/cmb"

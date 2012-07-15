@@ -9,7 +9,7 @@
 
 local _, addon = ...
 
-local L = setmetatable({}, { __index = function(L, k)
+local L = setmetatable(addon.L or {}, { __index = function(L, k)
 	local v = tostring(k)
 	rawset(L, k, v)
 	return v
@@ -171,7 +171,7 @@ function addon:OnProfileLoad()
 		numBindings = numBindings + 1
 	end
 	if numBindings == 0 then
-		self.db.profile.bindings[L["Cancel Buffs"]] = {
+		self.db.profile.bindings[L["Remove Buffs"]] = {
 		--	key         -- string  - key to activate this binding
 			buffGroups = {}, -- table   - list of buff groups to cancel
 		--	forms       -- boolean - whether to cancel shapeshift forms
