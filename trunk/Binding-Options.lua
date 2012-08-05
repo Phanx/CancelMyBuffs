@@ -96,7 +96,7 @@ do
 				t[name] = addon.spellStringsDisabled[id] or name
 			end
 		end
-		table.sort(t)
+		sort(t)
 	end
 
 	group_desc = function(info)
@@ -119,7 +119,7 @@ end
 ------------------------------------------------------------------------
 
 local delete_confirm = function(info)
-	return string.format(L["Are you sure you want to delete the %s binding?"], info.arg)
+	return format(L["Are you sure you want to delete the %s binding?"], info.arg)
 end
 
 local delete_func = function(info)

@@ -9,6 +9,10 @@
 
 local _, addon = ...
 
+local format, print, strfind, strjoin = format, print, strfind, strjoin
+
+------------------------------------------------------------------------
+
 local L = setmetatable(addon.L or {}, { __index = function(L, k)
 	local v = tostring(k)
 	rawset(L, k, v)
@@ -21,6 +25,8 @@ addon.spellNames = {}
 addon.spellIcons = {}
 addon.spellStrings = {}
 addon.spellStringsDisabled = {}
+
+------------------------------------------------------------------------
 
 function addon:OnLoad()
 	self:Debug("OnLoad")
@@ -135,7 +141,7 @@ function addon:OnLoad()
 			if type(id) == "number" then
 				local name, _, icon = GetSpellInfo(id)
 				if name then
-					local text = string.format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", icon, name)
+					local text = format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", icon, name)
 					self.spellNames[id] = name
 					self.spellIcons[id] = icon
 					self.spellStrings[id] = text
@@ -200,6 +206,8 @@ function addon:OnProfileUnload()
 	end
 end
 
+------------------------------------------------------------------------
+
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function()
@@ -208,6 +216,8 @@ f:SetScript("OnEvent", function()
 	addon.eventFrame = f
 	return addon:OnLoad()
 end)
+
+------------------------------------------------------------------------
 
 function addon:FindAndReplaceInTable(tbl, key, old, new)
 	for k, v in pairs(tbl) do
@@ -220,31 +230,30 @@ function addon:FindAndReplaceInTable(tbl, key, old, new)
 	return tbl
 end
 
+------------------------------------------------------------------------
+
 addon.debug = false
+
 function addon:Debug(str, ...)
-	if not str or not self.debug then return end
-	if type(str) == "string" and str:match("%%[dsx%d%.]") then
-		print("|cffff9999CMB2:|r", str:format(...))
-	else
-		print("|cffff9999CMB2:|r", str, ...)
+	if str and self.debug then
+		if ... then
+			if strfind(str, "%%[dfqsx%.%d]") then
+				str = format(str, ...)
+			else
+				str = strjoin(", ", str, ...)
+			end
+		end
+		print(format("|cffff7f7f[DEBUG] CMB:|r %s", str))
 	end
 end
 
 function addon:Print(str, ...)
-	local noPrefix
-	if type(str) == "boolean" and str then
-		str = select(1, ...)
-		noPrefix = true
-	end
-	if type(str) == "string" and str:match("%%[dsx%d%.]") then
-		if noPrefix then
-			print("|cffffcc00CancelMyBuffs:|r", str:format(select(2, ...)))
+	if (...) then
+		if strfind(str, "%%[dfqsx%.%d]") then
+			str = format(str, ...)
 		else
-			print("|cffffcc00CancelMyBuffs:|r", str:format(...))
+			str = strjoin(", ", ...)
 		end
-	elseif noPrefix then
-		print("|cffffcc00CancelMyBuffs:|r", str, select(2, ...))
-	else
-		print("|cffffcc00CancelMyBuffs:|r", str, ...)
 	end
+	print(format("|cffffcc00CancelMyBuffs:|r %s", str))
 end
