@@ -20,7 +20,7 @@ do
 	end
 
 	local delete_confirm = function(info)
-		return string.format(L["Are you sure you want to delete the %s buff group?"], info.arg)
+		return format(L["Are you sure you want to delete the %s buff group?"], info.arg)
 	end
 
 	local delete_func = function(info)
@@ -163,7 +163,7 @@ do
 		local groupName = info.arg
 		local spellID = tonumber(info[#info-1])
 		local spellName = addon.spellNames[spellID] or info[#info-1]
-		return string.format(L["Are you sure you want to delete %s from the the %s buff group?"], spellName, groupName)
+		return format(L["Are you sure you want to delete %s from the the %s buff group?"], spellName, groupName)
 	end
 
 	local delete_func = function(info)

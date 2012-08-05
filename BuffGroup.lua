@@ -127,10 +127,10 @@ function addon:AddBuffToGroup(groupName, buffName)
 	end
 
 	if not buffIcon then
-		return false, string.format(L["%s does not appear to be a valid spell ID or spell name."], buffName or buffID)
+		return false, format(L["%s does not appear to be a valid spell ID or spell name."], buffName or buffID)
 	end
 
-	local text = string.format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", buffName, buffIcon)
+	local text = format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", buffName, buffIcon)
 	self.spellNames[buffID] = buffName
 	self.spellIcons[buffID] = buffIcon
 	self.spellStrings[buffID] = text

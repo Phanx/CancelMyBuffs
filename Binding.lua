@@ -154,7 +154,7 @@ do
 
 			local now = GetTime()
 			if GetTime() - (self.lastAlert[bindingName] or 0) > 30 then
-				self:Print(string.format(L["The %s binding includes too many buffs! Some buffs may not be removed. Try selecting fewer buff groups, removing some unused buffs from your buff groups, or creating a second binding."], bindingName))
+				self:Print(format(L["The %s binding includes too many buffs! Some buffs may not be removed. Try selecting fewer buff groups, removing some unused buffs from your buff groups, or creating a second binding."], bindingName))
 				self.lastAlert[bindingName] = now
 			end
 
@@ -186,7 +186,7 @@ function addon:SetBindingKey(bindingName, key)
 
 	local db = addon.db.profile.bindings[bindingName]
 	if not db then
-		return false, string.format("Binding %s not found.", bindingName) -- Not localized because this cannot happen through AceConfig.
+		return false, format("Binding %s not found.", bindingName) -- Not localized because this cannot happen through AceConfig.
 	end
 
 	local name = self.db.profile.bindings[bindingName].name
@@ -236,7 +236,7 @@ do
 			if InCombatLockdown() then
 				return false, "Buttons cannot be created in combat."
 			elseif unused[1] then
-				button = table.remove(unused, 1)
+				button = tremove(unused, 1)
 			else
 				i = i + 1
 				local buttonName = "CancelMyBuffsButton" .. i
@@ -276,7 +276,7 @@ do
 		end
 
 		buttons[bindingName] = nil
-		table.insert(unused, button)
+		tinsert(unused, button)
 
 		button:SetAttribute("type1", nil)
 		button:SetAttribute("macrotext1", nil)
