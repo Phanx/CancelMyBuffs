@@ -10,7 +10,7 @@
 	Last updated 2012-08-01 by okaydud @ CurseForge
 ----------------------------------------------------------------------]]
 
-if GetLocale() ~= "zhCN" then return end
+if GetLocale() ~= "zhTW" then return end
 
 local _, addon = ...
 addon.L = {
