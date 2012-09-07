@@ -3,15 +3,22 @@
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly remove unwanted buffs using key bindings.
+## Notes-esES: Rápidamente cancelar los beneficios no deseados mediante las asignaciones de teclas.
+## Notes-esMX: Rápidamente cancelar los beneficios no deseados mediante las asignaciones de teclas.
+## Notes-zhCN: 使用绑定的快捷键快速移除不想要的buff。
+## Notes-zhTW: 使用綁定的快捷鍵快速移除不想要的buff。
+
+## Author: Phanx
 ## X-Email: addons@phanx.net
 ## X-Copyright: Copyright (c) 2010-2012 Phanx. All rights reserved.
 ## X-License: See accompanying LICENSE file for details.
 ## X-CompatibleLocales: enUS, deDE, esES, esMX, frFR, itIT, ptBR, ruRU, koKR, zhCN, zhTW
-## X-Localizations: enUS, zhCN, zhTW
+## X-Localizations: enUS, esES, esMX, zhCN, zhTW
 ## X-Website: http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 ## X-Curse-Project-ID: cancelmybuffs
 ## X-WoWI-ID: 18447
 
+## OptionalDependencies: Ace3, LibAboutPanel
 ## SavedVariables: CancelMyBuffsDB
 
 Libs\LibStub\LibStub.lua
@@ -21,7 +28,9 @@ Libs\AceConfigRegistry-3.0\AceConfigRegistry-3.0.lua
 Libs\AceConfigDialog-3.0\AceConfigDialog-3.0.lua
 Libs\AceDB-3.0\AceDB-3.0.lua
 Libs\AceDBOptions-3.0\AceDBOptions-3.0.lua
+Libs\LibAboutPanel\LibAboutPanel.lua
 
+Locales\esMX.lua
 Locales\zhCN.lua
 Locales\zhTW.lua
 
