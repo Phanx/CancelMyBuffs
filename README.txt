@@ -1,17 +1,17 @@
 CancelMyBuffs
-=============
-
-* Copyright (c) 2010-2012 Phanx <addons@phanx.net>. All rights reserved.
-* See the accompanying LICENSE file for more information.
+=================
+* A World of Warcraft user interface addon
+* Copyright (c) 2010-2013 Phanx
+* See the accompanying LICENSE file for more information
 * http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 * http://www.curse.com/addons/wow/cancelmybuffs
 
 
 Description
------------
+---------------
 
 CancelMyBuffs lets you quickly and easily remove unwanted buffs using
-keybindings.
+key bindings.
 
 It was written in response to the annoying restrictions Blizzard added
 in WoW 4.0 (Cataclysm) that prevented most buff addons from letting you
@@ -27,8 +27,8 @@ and cancels my shapeshift form. Tanks may find it useful to bind a key
 to cancel Hand of Protection and other similar effects.
 
 
-Usage
------
+Options
+-----------
 
 Type "/cmb" for options, or find them in the Interface Options window.
 
@@ -37,32 +37,29 @@ are saved globally, so you don't have to set them up all over again for
 every different character you play.
 
 
-Localization
-------------
+Language Support
+--------------------
 
 Compatible with English, Deutsch, Español (EU), Español (AL), Français,
 Italiano, Português, Русский, 한국어, 简体中文, and 繁體中文 game clients.
 
 Translated into English.
 
-To add or update translations for any language, see the Localization tab
-on the CurseForge project page:
+To add or update translations for any language, please visit the
+[CurseForge localization page] [1].
 
-http://wow.curseforge.com/addons/cancelmybuffs/localization/
+	[1]: http://wow.curseforge.com/addons/cancelmybuffs/localization/
 
 
 Feedback
---------
+------------
 
-Bugs, errors, or other problems:
-	Submit a bug report ticket on either download page.
+To report a bug or suggest a feature, please post a ticket on either
+download page.
 
-Feature requests or other suggestions:
-	Submit a feature request ticket system on either download page.
+For general questions and feedback, post a comment on WoWInterface.
 
-General questions or comments:
-	Post a comment on the WoWInterface download page.
-
-If you need to contact me privately for a reason other than those listed
-above, you can send me a private message on either download site, or
-email me at <addons@phanx.net>.
+Please *do not* send me email or PMs about bugs, suggestions, questions,
+or other addon feedback. If you need to contact me privately for some
+other reason, you can email <addons@phanx.net> or send a PM to Phanx on
+either WoWInterface or Curse.
