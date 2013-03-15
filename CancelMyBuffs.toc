@@ -1,10 +1,10 @@
-## Interface: 50100
-## Version: 5.1.0.wowi:revision
+## Interface: 50200
+## Version: 5.2.0.wowi:revision
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly remove unwanted buffs using key bindings.
-## Notes-esES: Rápidamente cancelar los beneficios no deseados mediante las asignaciones de teclas.
-## Notes-esMX: Rápidamente cancelar los beneficios no deseados mediante las asignaciones de teclas.
+## Notes-esES: Quitar rápidamente los beneficios no deseados por las teclas.
+## Notes-esMX: Quitar rápidamente los beneficios no deseados por las teclas.
 ## Notes-zhCN: 使用绑定的快捷键快速移除不想要的buff。
 ## Notes-zhTW: 使用綁定的快捷鍵快速移除不想要的buff。
 
