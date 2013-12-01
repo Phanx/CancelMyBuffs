@@ -6,7 +6,7 @@
 	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 	http://www.curse.com/addons/wow/cancelmybuffs
 ------------------------------------------------------------------------
-	Localization for Spanish
+	Spanish localization
 	Last updated 2012-09-07 by Phanx
 ----------------------------------------------------------------------]]
 
@@ -19,7 +19,7 @@ addon.L = {
 	["Add, remove, and configure bindings for removing buffs. These settings are stored on a per-profile basis."] = "Añadir, remover y configurar las asignaciones de teclas para cancelar los beneficios.",
 	["Add, remove, and configure buffs and buff groups. These settings are stored on a global basis."] = "Añadir, remover y configurar los beneficios y los grupos de beneficios.",
 	["Always"] = "Siempre",
-	["Are you sure you want to delete %s from the the %s buff group?"] = "¿Seguro que quieres eliminar %s del grupo de beneficios %s?",
+	["Are you sure you want to delete %s from the %s buff group?"] = "¿Seguro que quieres eliminar %s del grupo de beneficios %s?",
 	["Are you sure you want to delete the %s binding?"] = "¿Seguro que quieres eliminar la asignación %s?",
 	["Are you sure you want to delete the %s buff group?"] = "¿Seguro que quieres eliminar el grupo de beneficios %s?",
 	["Binding names cannot be blank. You must enter at least one non-whitespace character to create a new binding."] = "Los nombres de asignaciones no pueden estar vacíos. Debes escribir al menos una letra o un número para crear una nueva asignación.",

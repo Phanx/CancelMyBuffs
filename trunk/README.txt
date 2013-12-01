@@ -1,5 +1,6 @@
 CancelMyBuffs
 =================
+
 * A World of Warcraft user interface addon
 * Copyright (c) 2010-2013 Phanx
 * See the accompanying LICENSE file for more information

@@ -17,10 +17,9 @@ function addon:NewBuffGroup(groupName)
 		return false, "Group already exists."
 	end
 
-	self.db.global.buffGroups[groupName] = {
-	}
+	self.db.global.buffGroups[groupName] = {}
 
-	self.options.args.buffGroups[groupName] = self:GetBuffGroupOptions(groupName)
+	self:LoadBuffGroup(groupName)
 
 	return true
 end
