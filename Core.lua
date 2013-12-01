@@ -240,7 +240,7 @@ function addon:Debug(str, ...)
 			if strfind(str, "%%[dfqsx%.%d]") then
 				str = format(str, ...)
 			else
-				str = strjoin(", ", str, ...)
+				str = strjoin(", ", str, tostringall(...))
 			end
 		end
 		print(format("|cffff7f7f[DEBUG] CMB:|r %s", str))

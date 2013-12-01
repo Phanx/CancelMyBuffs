@@ -24,7 +24,7 @@ do
 	end
 
 	local delete_func = function(info)
-		addon:DeleteBuffGroup(info.arg)
+		addon:RemoveBuffGroup(info.arg)
 	end
 
 	local new_get = function(info)
@@ -71,6 +71,12 @@ do
 					set = new_set,
 					arg = groupName,
 				},
+				buffs = {
+					order = 3,
+					name = L["Buffs"],
+					type = "group", dialogInline = true,
+					args = {},
+				},
 				delete = {
 					order = 4,
 					name = L["Delete group"],
@@ -79,11 +85,6 @@ do
 					confirm = delete_confirm,
 					func = delete_func,
 					arg = groupName,
-				},
-				buffs = {
-					name = L["Buffs"],
-					type = "group", dialogInline = true,
-					args = {},
 				},
 			}
 		}
@@ -153,7 +154,7 @@ do
 		if type(enabled) ~= "string" then return end
 
 		if not value then
-			addon.db.global.buffGroups[groupName][buffID] = enabled:gsub(class, ""):trim()
+			addon.db.global.buffGroups[groupName][buffID] = strtrim(gsub(enabled, class, ""))
 		elseif enabled:find(class) then
 			addon.db.global.buffGroups[groupName][buffID] = enabled .. " " .. class
 		end
@@ -167,7 +168,7 @@ do
 	end
 
 	local delete_func = function(info)
-		addon:RemoveBuffFromGroup(info.arg, info[#info-1])
+		addon:RemoveBuffFromGroup(info.arg, tonumber(info[#info-1]))
 	end
 
 	function addon:GetBuffOptions(group, buff)
@@ -225,6 +226,6 @@ do
 end
 
 function addon:AddOptionsForBuff(groupName, buffID)
-	options.args.buffs.args[tostring(buffID)] = self:GetBuffOptions(groupName, buffID)
+	self.options.args.buffGroups.args[groupName].args.buffs.args[tostring(buffID)] = self:GetBuffOptions(groupName, buffID)
 	return true
 end

@@ -6,7 +6,7 @@
 	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 	http://www.curse.com/addons/wow/cancelmybuffs
 ------------------------------------------------------------------------
-	Localization for zhCN / Simplified Chinese / 简体中文
+	Simplified Chinese localization
 	Last updated 2012-08-01 by okaydud @ CurseForge
 ----------------------------------------------------------------------]]
 
@@ -19,7 +19,7 @@ addon.L = {
 	["Add, remove, and configure bindings for removing buffs. These settings are stored on a per-profile basis."] = "添加、移除和配置绑定取消的buff，这些配置基于每个角色保存。",
 	["Add, remove, and configure buffs and buff groups. These settings are stored on a global basis."] = "添加、移除和配置buff和buff分组，这些配置基于全局保存。",
 	["Always"] = "总是",
-	["Are you sure you want to delete %s from the the %s buff group?"] = "你确定想要从%s 分组删除%s ？",
+	["Are you sure you want to delete %s from the %s buff group?"] = "你确定想要从%s 分组删除%s ？",
 	["Are you sure you want to delete the %s binding?"] = "你确定想要删除 %s 绑定？",
 	["Are you sure you want to delete the %s buff group?"] = "你确定想要删除%s buff分组？",
 	["Binding names cannot be blank. You must enter at least one non-whitespace character to create a new binding."] = "绑定名称不能为空。必须输入至少一个非空格字符以创建一个新的绑定。",
