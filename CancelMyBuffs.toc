@@ -1,11 +1,11 @@
 ## Interface: 50400
-## Version: 5.4.1.wowi:revision
+## Version: 5.4.2.wowi:revision
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly remove unwanted buffs using key bindings.
-## Notes-deDE: Unerwünschte Stärkungszauber mit Tastaturbelegungen entfernen.
-## Notes-esES: Quitar rápidamente los beneficios no deseados por las teclas.
-## Notes-esMX: Quitar rápidamente los beneficios no deseados por las teclas.
+## Notes-deDE: Unerwünschte Stärkungszauber mit Tastenbelegungen rasch und leicht abbrechen.
+## Notes-esES: Quitar rápidamente y fácilmente los beneficios no deseados por las teclas.
+## Notes-esMX: Quitar rápidamente y fácilmente los beneficios no deseados por las teclas.
 ## Notes-zhCN: 使用绑定的快捷键快速移除不想要的buff。
 ## Notes-zhTW: 使用綁定的快捷鍵快速移除不想要的buff。
 
