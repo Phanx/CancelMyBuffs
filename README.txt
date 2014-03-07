@@ -2,7 +2,7 @@ CancelMyBuffs
 =================
 
 * A World of Warcraft user interface addon
-* Copyright (c) 2010-2013 Phanx
+* Copyright (c) 2010-2014 Phanx
 * See the accompanying LICENSE file for more information
 * http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 * http://www.curse.com/addons/wow/cancelmybuffs
