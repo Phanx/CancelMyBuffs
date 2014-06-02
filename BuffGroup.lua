@@ -126,10 +126,11 @@ function addon:AddBuffToGroup(groupName, buffName)
 	end
 
 	if not buffIcon then
+		self:Debug("Invalid spell ID or name")
 		return false, format(L["%s does not appear to be a valid spell ID or spell name."], buffName or buffID)
 	end
 
-	local text = format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", buffName, buffIcon)
+	local text = format("|T%s:0:0:0:0:32:32:2:30:2:30|t %s", buffIcon, buffName)
 	self.spellNames[buffID] = buffName
 	self.spellIcons[buffID] = buffIcon
 	self.spellStrings[buffID] = text
@@ -138,6 +139,8 @@ function addon:AddBuffToGroup(groupName, buffName)
 	self.db.global.buffGroups[groupName][buffID] = true
 
 	self:AddOptionsForBuff(groupName, buffID)
+
+	self:UpdateAllBindings()
 
 	return true
 end

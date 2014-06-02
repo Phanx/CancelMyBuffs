@@ -53,28 +53,29 @@ function addon:OnLoad()
 		numBuffGroups = numBuffGroups + 1
 	end
 	if numBuffGroups == 0 then
-		self.db.global.buffGroups["Invulnerability"] = {
+		local t = self.db.global.buffGroups
+		t["Invulnerability"] = {
 			[46924] = 46924, -- Blade Storm [WARRIOR]
 			[19263] = 19263, -- Deterrence [HUNTER]
 			[642]   = 642,   -- Divine Shield [PALADIN]
 			[1022]  = true,  -- Hand of Protection
 			[45438] = 45438, -- Ice Block [MAGE]
 		}
-		self.db.global.buffGroups["Stealth"] = {
+		t["Stealth"] = {
 			[66]    = 66,    -- Invisibility [MAGE]
 			[5215]  = 5215,  -- Prowl [DRUID]
 			[58984] = 58984, -- Shadowmeld [NightElf]
 			[1784]  = 1784,  -- Stealth [ROGUE]
 			[1856]  = 1856,  -- Vanish [ROGUE] -- check 11327
 		}
-		self.db.global.buffGroups["Controllers"] = {
+		t["Controllers"] = {
 			[75111] = true, -- Blue Crashin' Thrashin' Racer Controller
 			[30019] = true, -- Control Piece (Karazhan)
 			[49352] = true, -- Crashin' Thrashin' Racer Controller
 			[45440] = true, -- Steam Tonk Controller
 			[65451] = true, -- Using MiniZep Controller
 		}
-		self.db.global.buffGroups["Shapeshift Effects"] = {
+		t["Shapeshift Effects"] = {
 			[24732] = true, -- Bat Costume
 			[22736] = true, -- Gordok Ogre Suit
 			[58501] = true, -- Iron Boot Flask
@@ -85,13 +86,15 @@ function addon:OnLoad()
 			[21848] = true, -- Snowman
 			[24740] = true, -- Wisp Costume
 		}
-		self.db.global.buffGroups["Quest Effects"] = {
-			[37868] = true, -- Arcano-Scorp Control
+		t["Quest Effects"] = {
+			[37868] = true, -- Arcano-Scorp Control [Shadowmoon Valley]
 			[77647] = true, -- Fel-Infused [killing mobs in Dustwind Cave]
 			[88715] = true, -- Herbouflage [Lifegiving Seed]
 			[75724] = true, -- Seeds of Discord [Ogre Disguise quest item]
+			[52191] = true, -- Scourge Disguize [Zul'Drak]
+			[43369] = true, -- Worg Disguise [Howling Fjord]
 		}
-		self.db.global.buffGroups["Cosmetic Effects"] = {
+		t["Cosmetic Effects"] = {
 			[60122] = true, -- Baby Spice
 			[27571] = true, -- Cascade of Roses [Handful of Roses]
 			[51010] = true, -- Dire Brew
@@ -111,26 +114,26 @@ function addon:OnLoad()
 			[61815] = true, -- Sprung! [Spring Flowers]
 			[61781] = true, -- Turkey Feathers
 		}
-		self.db.global.buffGroups["Slow Fall"] = {
+		t["Slow Fall"] = {
 			[1706]  = true, -- Levitate
 			[16593] = true, -- Noggenfogger Elixir (slow fall)
 			[130]   = true, -- Slow Fall
 		}
-		self.db.global.buffGroups["Water Walking"] = {
+		t["Water Walking"] = {
 			[11319]  = true, -- Elixir of Water Walking
 			[1706]   = true, -- Levitate
 			[546]    = true, -- Water Walking
 		}
-		self.db.global.buffGroups["Divine Plea"] = {
+		t["Divine Plea"] = {
 			[54428] = 54428, -- Divine Plea [PALADIN]
 		}
-		self.db.global.buffGroups["Hellfire"] = {
+		t["Hellfire"] = {
 			[1949]  = 1949,  -- Hellfire [WARLOCK]
 		}
-		self.db.global.buffGroups["Mind Control"] = {
+		t["Mind Control"] = {
 			[605]   = 605, -- Mind Control [PRIEST]
 		}
-		self.db.global.buffGroups["Flask of Enhancement"] = {
+		t["Flask of Enhancement"] = {
 			[79639] = "DRUID HUNTER MONK ROGUE SHAMAN", -- Enhanced Agility
 			[79640] = "DRUID MAGE MONK PALADIN PRIEST SHAMAN WARLOCK", -- Enhanced Intellect
 			[79638] = "DEATHKNIGHT PALADIN WARRIOR", -- Enhanced Strength

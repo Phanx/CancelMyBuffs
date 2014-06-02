@@ -74,10 +74,10 @@ end
 
 local group_desc, group_disabled
 do
-	local e, d, t = 0, 0, {}
+	local t, e = {}, 0
 
 	local function update(info)
-		e, d = 0, 0
+		e = 0
 		wipe(t)
 		local groupName = info[#info]
 		for id in pairs(addon.db.global.buffGroups[groupName]) do
@@ -91,7 +91,6 @@ do
 				t[#t+1] = name
 				t[name] = addon.spellStrings[id] or name
 			elseif not enabled and not t[name] then
-				d = d + 1
 				t[#t+1] = name
 				t[name] = addon.spellStringsDisabled[id] or name
 			end
@@ -101,13 +100,11 @@ do
 
 	group_desc = function(info)
 		update(info)
-
-		local desc = ""
-		for i = 1, #t do
+		local desc = t[t[1]]
+		for i = 2, #t do
 			desc = desc .. "\n" .. t[t[i]]
 		end
-
-		return desc:sub(2)
+		return desc
 	end
 
 	group_disabled = function(info)
