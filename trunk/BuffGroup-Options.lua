@@ -103,7 +103,7 @@ do
 		local groupName = info.arg
 		local buffID = tonumber(info[#info-1])
 		local enabled = addon.db.global.buffGroups[groupName][buffID]
-
+		
 		if type(enabled) == "number" then
 			return "SPELL"
 		elseif type(enabled) == "string" then
@@ -127,8 +127,8 @@ do
 		else
 			value = false
 		end
-
-		if type(enabled) == type(value) then
+		
+		if enabled == value then
 			return
 		end
 
@@ -226,6 +226,7 @@ do
 end
 
 function addon:AddOptionsForBuff(groupName, buffID)
+	self:Debug("AddOptionsForBuff", groupName, buffID, (GetSpellInfo(buffID)))
 	self.options.args.buffGroups.args[groupName].args.buffs.args[tostring(buffID)] = self:GetBuffOptions(groupName, buffID)
 	return true
 end
