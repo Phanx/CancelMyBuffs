@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Version: 5.4.2.wowi:revision
+## Version: 5.4.8.wowi:revision
 
 ## Title: CancelMyBuffs
 ## Notes: Quickly remove unwanted buffs using key bindings.
