@@ -53,14 +53,21 @@ To add or update translations for any language, please visit the
 
 
 Feedback
-------------
+-----------
 
-To report a bug or suggest a feature, please post a ticket on either
-download page.
+**Post a comment on WoWInterface.** If you are reporting a bug, please
+include detailed instructions I can follow to reproduce the bug myself,
+whether or not it still happens when all other addons are disabled, and
+the exact text of the first related error message (if any) from BugSack.
 
-For general questions and feedback, post a comment on WoWInterface.
+If you need to contact me privately, you can send a private message to
+Phanx on either download site, or email me at <addons@phanx.net>.
+**Please note** that I do not provide private addon support or tutoring
+of any kind; post a comment or forum thread instead!
 
-Please *do not* send me email or PMs about bugs, suggestions, questions,
-or other addon feedback. If you need to contact me privately for some
-other reason, you can email <addons@phanx.net> or send a PM to Phanx on
-either WoWInterface or Curse.
+
+License
+----------
+
+Copyright (c) 2010-2014 Phanx. All rights reserved. See the accompanying
+LICENSE file for additional information.
