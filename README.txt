@@ -41,10 +41,10 @@ every different character you play.
 Language Support
 --------------------
 
-Compatible with English, Deutsch, Español (EU), Español (AL), Français,
-Italiano, Português, Русский, 한국어, 简体中文, and 繁體中文 game clients.
+Compatible with English, Deutsch, Español, Français, Italiano, 
+Português, Русский, 한국어, 简体中文 and 繁體中文 game clients.
 
-Translated into English.
+Translated into English, Deutsch, Español, 简体中文 and 繁體中文.
 
 To add or update translations for any language, please visit the
 [CurseForge localization page] [1].
@@ -53,14 +53,22 @@ To add or update translations for any language, please visit the
 
 
 Feedback
-------------
+-----------
 
-To report a bug or suggest a feature, please post a ticket on either
-download page.
+Post a ticket on either download site, or a comment on WoWInterface.
 
-For general questions and feedback, post a comment on WoWInterface.
+If you are reporting a bug, please include directions I can follow to
+reproduce the bug, whether it still happens when all other addons are
+disabled, and the exact text of the related error message (if any) from 
+[BugSack](http://www.wowinterface.com/downloads/info5995-BugSack.html).
 
-Please *do not* send me email or PMs about bugs, suggestions, questions,
-or other addon feedback. If you need to contact me privately for some
-other reason, you can email <addons@phanx.net> or send a PM to Phanx on
-either WoWInterface or Curse.
+If you need to contact me privately, you can send me a private message
+on either download site, or email me at <addons@phanx.net>.
+
+
+License
+----------
+
+Copyright (c) 2010-2014 Phanx <addons@phanx.net>. All rights reserved.
+See the accompanying LICENSE file for information about the conditions
+under which redistribution and modification may be allowed.
