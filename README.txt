@@ -1,18 +1,18 @@
 CancelMyBuffs
 =================
 
-* A World of Warcraft user interface addon
-* Copyright (c) 2010-2014 Phanx
-* See the accompanying LICENSE file for more information
+Quickly and easily remove unwanted buffs using key bindings.
+
+
+Download
+-----------
+
 * http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 * http://www.curse.com/addons/wow/cancelmybuffs
 
 
 Description
 ---------------
-
-CancelMyBuffs lets you quickly and easily remove unwanted buffs using
-key bindings.
 
 It was written in response to the annoying restrictions Blizzard added
 in WoW 4.0 (Cataclysm) that prevented most buff addons from letting you
@@ -38,16 +38,14 @@ are saved globally, so you don't have to set them up all over again for
 every different character you play.
 
 
-Language Support
---------------------
+Localization
+---------------
 
-Compatible with English, Deutsch, Español, Français, Italiano, 
-Português, Русский, 한국어, 简体中文 and 繁體中文 game clients.
-
-Translated into English, Deutsch, Español, 简体中文 and 繁體中文.
+Works in all languages. Translated into English, Deutsch, Español,
+Русский, 简体中文 and 繁體中文.
 
 To add or update translations for any language, please visit the
-[CurseForge localization page] [1].
+[CancelMyBuffs localization page] [1] on CurseForge.
 
 	[1]: http://wow.curseforge.com/addons/cancelmybuffs/localization/
 
@@ -59,7 +57,7 @@ Post a ticket on either download site, or a comment on WoWInterface.
 
 If you are reporting a bug, please include directions I can follow to
 reproduce the bug, whether it still happens when all other addons are
-disabled, and the exact text of the related error message (if any) from 
+disabled, and the exact text of the related error message (if any) from
 [BugSack](http://www.wowinterface.com/downloads/info5995-BugSack.html).
 
 If you need to contact me privately, you can send me a private message
@@ -69,6 +67,6 @@ on either download site, or email me at <addons@phanx.net>.
 License
 ----------
 
-Copyright (c) 2010-2014 Phanx <addons@phanx.net>. All rights reserved.
+Copyright (c) 2010-2014 Phanx. All rights reserved.
 See the accompanying LICENSE file for information about the conditions
 under which redistribution and modification may be allowed.
