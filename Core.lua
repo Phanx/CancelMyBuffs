@@ -48,11 +48,7 @@ function addon:OnLoad()
 
 	self.db.RegisterCallback(self, "OnProfileShutdown", "OnProfileUnload")
 
-	local numBuffGroups = 0
-	for groupName, groupBuffs in pairs(self.db.global.buffGroups) do
-		numBuffGroups = numBuffGroups + 1
-	end
-	if numBuffGroups == 0 then
+	if not next(self.db.global.buffGroups) then
 		local t = self.db.global.buffGroups
 		t["Invulnerability"] = {
 			[46924] = 46924, -- Blade Storm [WARRIOR]
@@ -124,9 +120,6 @@ function addon:OnLoad()
 			[1706]   = true, -- Levitate
 			[546]    = true, -- Water Walking
 		}
-		t["Divine Plea"] = {
-			[54428] = 54428, -- Divine Plea [PALADIN]
-		}
 		t["Hellfire"] = {
 			[1949]  = 1949,  -- Hellfire [WARLOCK]
 		}
@@ -139,6 +132,7 @@ function addon:OnLoad()
 			[79638] = "DEATHKNIGHT PALADIN WARRIOR", -- Enhanced Strength
 		}
 	end
+
 	for groupName, groupBuffs in pairs(self.db.global.buffGroups) do
 		for id in pairs(groupBuffs) do
 			if type(id) == "number" then
@@ -150,7 +144,8 @@ function addon:OnLoad()
 					self.spellStrings[id] = text
 					self.spellStringsDisabled[id] = "|cff999999" .. text .. "|r"
 				else
-					print("Invalid spell ID", id, "in buff group", groupName)
+					print("|cffff7f7fCancelMyBuffs:|r Removed invalid spell ID", id, "in buff group", groupName)
+					groupBuffs[id] = nil
 				end
 			end
 		end
@@ -186,7 +181,7 @@ function addon:OnProfileLoad()
 		--	forms       -- boolean - whether to cancel shapeshift forms
 		--	mounts      -- boolean - whether to dismount
 		--	vehicles    -- boolean - whether to exit the vehicle
-		--  weaponBuffs -- boolean - whether to remove weapon buffs
+		-- weaponBuffs -- boolean - whether to remove weapon buffs
 		}
 		self:Print(L["Default configuration loaded. Type \"/cmb\" to bind a key or change settings."])
 	end
