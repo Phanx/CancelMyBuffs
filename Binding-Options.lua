@@ -191,15 +191,6 @@ function addon:GetBindingOptions(name)
 				get = special_get,
 				set = special_set,
 			},
-			weaponBuffs = {
-				width = "double",
-				name = L["Remove weapon buffs"],
-				desc = L["Remove weapon buffs, such as rogue poisons or shaman enchants, when activating this binding."],
-				type = "toggle",
-				arg = bindingName,
-				get = special_get,
-				set = special_set,
-			},
 			buffGroups = {
 				order = -2,
 				name = L["Buff Groups"],
