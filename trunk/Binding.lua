@@ -38,7 +38,6 @@ function addon:NewBinding(bindingName)
 	--	forms = nil,
 	--	mounts = nil,
 	--	vehicles = nil,
-	--	weaponBuffs = nil,
 	}
 
 	self:LoadBinding(bindingName)
@@ -119,14 +118,6 @@ do
 		end
 		if bindingDB.vehicles then
 			macrotext = macrotext .. "\n/leavevehicle"
-		end
-		if bindingDB.weaponBuffs and self.hasWeaponBuffs then
-			if not TemporaryEnchantFrame:IsShown() then
-				TempEnchant1:SetID(16)
-				TempEnchant2:SetID(17)
-				TempEnchant3:SetID(18)
-			end
-			macrotext = macrotext .. "\n/click TempEnchant1 RightButton\n/click TempEnchant2 RightButton\n/click TempEnchant3 RightButton"
 		end
 
 		wipe(buffList)

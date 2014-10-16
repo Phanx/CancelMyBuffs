@@ -155,13 +155,6 @@ function addon:OnLoad()
 
 	self.class = class
 	self.hasForms = class == "DRUID" or class == "PRIEST" or class == "SHAMAN" or class == "WARLOCK"
-	self.hasWeaponBuffs = class == "ROGUE" or class == "SHAMAN" or class == "WARLOCK"
-
-	hooksecurefunc(TemporaryEnchantFrame, "Hide", function()
-		TempEnchant1:SetID(16)
-		TempEnchant2:SetID(17)
-		TempEnchant3:SetID(18)
-	end)
 
 	self:LoadOptions()
 	self:OnProfileLoad()
