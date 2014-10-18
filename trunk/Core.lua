@@ -74,6 +74,7 @@ function addon:OnLoad()
 		t["Shapeshift Effects"] = {
 			[24732] = true, -- Bat Costume
 			[172015] = true, -- Geist Costume
+			[172008] = true, -- Ghoul Costume
 			[22736] = true, -- Gordok Ogre Suit
 			[58501] = true, -- Iron Boot Flask
 			[16591] = true, -- Noggenfogger Elixir [skeleton]
