@@ -77,6 +77,7 @@ function addon:OnLoad()
 			[172015] = true, -- Geist Costume
 			[172008] = true, -- Ghoul Costume
 			[22736]  = true, -- Gordok Ogre Suit
+			[24927]  = true, -- Hallow's End Candy [floating spirit]
 			[58501]  = true, -- Iron Boot Flask
 			[16591]  = true, -- Noggenfogger Elixir [skeleton]
 			[30167]  = true, -- Red Ogre Costume [Carved Ogre Idol]
