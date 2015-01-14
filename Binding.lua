@@ -1,7 +1,7 @@
 --[[--------------------------------------------------------------------
 	CancelMyBuffs
 	Quickly and easily remove unwanted buffs using keybindings.
-	Copyright (c) 2010-2014 Phanx <addons@phanx.net>. All rights reserved.
+	Copyright (c) 2010-2015 Phanx <addons@phanx.net>. All rights reserved.
 	http://www.wowinterface.com/downloads/info18447-CancelMyBuffs.html
 	http://www.curse.com/addons/wow/cancelmybuffs
 	https://github.com/Phanx/CancelMyBuffs
