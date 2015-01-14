@@ -8,17 +8,10 @@
 ----------------------------------------------------------------------]]
 
 local _, addon = ...
-
+local L = addon.L
 local format, print, strfind, strjoin = format, print, strfind, strjoin
 
 ------------------------------------------------------------------------
-
-local L = setmetatable(addon.L or {}, { __index = function(L, k)
-	local v = tostring(k)
-	rawset(L, k, v)
-	return v
-end })
-addon.L = L
 
 addon.bindingNames = {}
 addon.spellNames = {}
